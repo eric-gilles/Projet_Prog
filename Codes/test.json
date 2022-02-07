@@ -1,0 +1,8 @@
+{
+    "personnages": [
+        { "nom": "Jeanne", "attributs": { "ses cheveux sont": ["blonds"], "ses yeux sont": ["marrons"], "sa peau est": ["blanche"], "son sexe est": ["femme"], "ce personnage est": ["agé"] } },
+        { "nom": "Margot", "attributs": { "ses cheveux sont": ["rose", "bleu"], "ses yeux sont": ["noirs"], "sa peau est": ["blanche"], "son sexe est": ["femme"], "ce personnage est": ["jeune"] } },
+        { "nom": "Robert", "attributs": { "ses cheveux sont": ["blancs"], "ses yeux sont": ["marrons"], "sa peau est": ["noir"], "son sexe est": ["homme"], "ce personnage est": ["agé", "chauve"] } },
+        { "nom": "George", "attributs": { "ses cheveux sont": ["blonds"], "ses yeux sont": ["verts", "bleus"], "sa peau est": ["blanche"], "son sexe est": ["homme"], "ce personnage est": ["un enfant"] } }
+    ]
+}
