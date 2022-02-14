@@ -1,11 +1,20 @@
-function Affichage(nombre){
+function Affichage(){
+    console.log("coucou j'existe");
+    let nbElement = 0;
+    console.log("debut decompression fichier JSON");
+    $.getJSON("ProjetProg/Codes/test.json", function(data){
+        $.each( data, function() {
+            nbElement ++;
+          });
+    });
+    console.log("fin debut decompression fichier JSON");
     let html = "<table>";
-    for(let i=nombre; i>0; i-=5){
+    for(let i=nbElement; i>0; i-=5){
         html += "<tr>";
         for(let j=0; j<=5; j++){
-            if(nombre>0){
+            if(nbElement>0){
                 html += "<td><img src='avatar.jpg' class='avatar'></td>";
-                nombre--;
+                nbElement--;
             }
         }
         html += "</tr>";
