@@ -2,7 +2,8 @@ function Affichage(){
     console.log("coucou j'existe");
     let nbElement = 0;
     console.log("debut decompression fichier JSON");
-    $.getJSON("ProjetProg/Codes/test.json", function(data){
+    $.getJSON("http://localhost:8888/test.json", function(data){
+        console.log("je suis dans le getJSON");
         $.each( data, function() {
             nbElement ++;
           });
@@ -22,3 +23,4 @@ function Affichage(){
     html += "</table>";
     $("#Personnages").append(html);
 }
+
