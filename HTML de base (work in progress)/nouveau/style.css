@@ -1,0 +1,52 @@
+h1{
+    text-align: center;
+}
+img{
+    width: 90%;
+    height: auto;
+    margin:5%
+}
+.logo{
+    width: 80%;
+    margin-right:0%;
+    margin-left:0%;
+    margin-top:0%;
+    margin-bottom:10%;
+}
+.cadre{
+    border-style:solid;
+    padding-right:0px;
+    background: linear-gradient(rgb(192, 224, 255), #0065fc);
+}
+.grille{
+    margin:5%;
+    background: linear-gradient(rgb(250, 253, 60), #fceb00);
+}
+.avatar{
+    border-style:solid;
+    border-color:rgb(255, 51, 0)
+}
+.proposition{
+    margin-top:0%;
+    margin-left:0px;
+    text-align:center;
+}
+.facile{
+    text-align: center;
+    right:50%;
+    
+}
+input{
+    border-radius: 15px;
+    width: 150px;
+    height:auto;
+    transition: all 500ms ease-out;
+}
+input:hover{
+    background-color: rgb(189, 189, 189);
+    
+}
+body {
+    font-family: 'ABeeZee';font-size: 22px;
+}
+
