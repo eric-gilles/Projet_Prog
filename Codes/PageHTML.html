@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="FonctionLigneCol.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href='https://fonts.googleapis.com/css?family=ABeeZee' rel='stylesheet'>
+</head>
+
+
+<title>Qui est-ce?</title>
+<body onload="Affichage(27)">
+    <div id="main">
+        <div class="HautDePage">
+            <div class="row">
+                <div class="col-12 col-md-9">
+                    <div class="cadre">
+                        <div class="grille" id="Personnages">
+                            <!--Affichage des images ici-->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-3">
+                    <div class="proposition">
+                        <div class="row">
+                            <div class="col-3 col-md-12">
+                                <img src="Logo-QuiEstce.png" alt="Italian Trulli" class="logo">
+                            </div>
+                            <div class="col-6 col-md-12"><br/>    
+                                Je pense qu'il s'agit de : <br/>
+                                <select id="essaie">
+                                    <!-- les options avec les balises <option></option>-->
+                                </select><br/>
+                            </div>
+                            <!-- <div class="col-3 col-md-12">
+                                <div class="facile"><br>
+                                    <input type="button" id="mode" value="MODE FACILE">
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="facile"><br>
+                            <input type="button" id="mode" value="MODE FACILE">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div id="Questions">
+                    <div id="question1">
+                        Est-ce que
+                        <select id="attr1">
+                            <!-- les options -->
+                        </select>
+                        <select id="valeur1">
+                            <!-- les options -->
+                        </select> ?
+                    </div>
+                    <select>
+                        <option>ET</option>
+                        <option>OU</option>
+                    </select>
+                    <div id="question 2">
+                        Est-ce que
+                        <select id="attr2">
+                            <!-- les options -->
+                        </select>
+                        <select id="valeur2">
+                            <!-- les options -->
+                        </select> ?
+                    </div>
+                </div>
+                <input type="button" value="VALIDER">   
+            </div>
+        </div>
+    </div>
+</body>
