@@ -1,7 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Qui est-ce?</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -9,23 +12,7 @@
     <script src="Fonctions.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
-<style>
-    h1{
-        text-align: center;
-    }
-    #Personnages{
-        border: solid;
-    }
-    #main{
-        border:solid;
-    }
-    img{
-        width: 150px;
-        height: auto;
-    }
-    
-</style>
-<title>Qui est-ce?</title>
+
 <body onload="ligneCol(10)">
     <h1>Qui est-ce?</h1>
     <div id="main">
@@ -35,7 +22,7 @@
                 </div>
                 <div class="col-sm-4">
                     <p>Je pense qu'il s'agit de:</p>
-                        <select id="essaie">
+                    <select id="essaie">
                             <!-- les options avec les balises <option></option>-->
                         </select>
                     <p>append JS pour savoir les essais</p>
@@ -57,8 +44,20 @@
                         
                     </div>
                 </div>
-                <input type="button" value="VALIDER">   
+                <input type="button" value="VALIDER">
             </div>
         </div>
     </div>
+    <input type="file" id="file-selector" multiple>
+    <script>
+        const fileSelector = document.getElementById('file-selector');
+        fileSelector.addEventListener('change', (event) => {
+            const fileList = event.target.files;
+            console.log(fileList);
+        });
+    </script>
+    <!--<script src="FonctionLigneCol.js"></script>-->
 </body>
+
+
+</html>
