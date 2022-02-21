@@ -4,29 +4,34 @@ function Affichage(){
     let nbElement = 0;
     console.log("debut decompression fichier JSON");
     $.getJSON("http://localhost:8888/test.json", function(data){
-        for(let i in data.personnages){
-            nbElement+=1;
-        }
-        console.log("Nombre d'élements : "+nbElement);
-        console.log("fin debut decompression fichier JSON");
         let html = "<table>";
-        console.log("Début For");
-        for(let i=nbElement; i>0; i-=5){
-            console.log("For in progress");
-            html += "<tr>";
-            for(let j=0; j<=5; j++){
-                if(nbElement>0){
-                    html += "<td><img src=";
-                    html += i.image;
-                    html += " class='avatar'></td>";
-                    nbElement--;
-                }
+        html += "<tr>";
+        for(let d of data.personnages){
+            if(nbElement > 4){
+                html += "</tr>";
+                html += "<tr>";
+                nbElement = 0;
             }
-            html += "</tr>";
+            nbElement += 1;
+            html += "<td class='caseTableau'><div class='card-container'><div class='card' onclick='this.classList.toggle(`rotated`)'><div class='card-contents card-front'><img src='http://localhost:8888/fichier/";
+            html += d.image;
+            html += "' class='avatar'></div><div class='card-contents card-back'><img src='https://raw.githubusercontent.com/eric-gilles/Projet_Prog/main/Animation_rotation/back.jpg'></div></div></div><p class='nom'>";
+            html += d.nom;
+            html += "</p></td>"  
         }
-        console.log("Fin For");
         html += "</table>";
         $("#Personnages").append(html);
     });
 }
 
+function changeImage(img){
+    if (img.src == "https://raw.githubusercontent.com/eric-gilles/Projet_Prog/main/Codes/avatar.jpg"){
+        //console.log("test");
+        img.src = "https://raw.githubusercontent.com/eric-gilles/Projet_Prog/main/Codes/back.jpg";
+        img.classList.toggle('rotated');
+    }else{
+        //img.classList.toggle('rotated');
+        img.src = "https://raw.githubusercontent.com/eric-gilles/Projet_Prog/main/Codes/avatar.jpg";
+        img.classList.toggle('rotated');
+    }
+}
