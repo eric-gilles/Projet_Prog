@@ -1,0 +1,123 @@
+<mxfile host="65bd71144e">
+    <diagram id="qMyLJuKl_yyuFvdXFcjr" name="Page-1">
+        <mxGraphModel dx="990" dy="575" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" background="none" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="5" style="edgeStyle=none;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="2" target="3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="2" target="4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="36" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=#FFFF00;" parent="1" source="2" target="31" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="Main" style="html=1;" parent="1" vertex="1">
+                    <mxGeometry x="589" y="326" width="110" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="Génrétateur" style="html=1;" parent="1" vertex="1">
+                    <mxGeometry x="361" y="326" width="110" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="30" value="    Page de Jeu" style="swimlane;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;gradientColor=none;swimlaneFillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="819" y="206" width="664" height="540" as="geometry">
+                        <mxRectangle x="813" y="330" width="110" height="23" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="4" value="Main" style="html=1;" parent="30" vertex="1">
+                    <mxGeometry x="97" y="122" width="110" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="HTML de base" style="html=1;" parent="30" vertex="1">
+                    <mxGeometry x="19" y="218" width="110" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" style="edgeStyle=none;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="30" source="4" target="7" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="Passage en mode&lt;br&gt;facile" style="html=1;" parent="30" vertex="1">
+                    <mxGeometry x="97" y="362" width="110" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fillColor=#a20025;strokeColor=#6F0000;strokeWidth=3;startArrow=none;" parent="30" source="37" target="9" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="Récupération des&lt;br&gt;infos du JSON" style="html=1;" parent="30" vertex="1">
+                    <mxGeometry x="343" y="122" width="110" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="30" source="4" target="11" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="Génération grille&lt;br&gt;de jeu en fonction &lt;br&gt;du&amp;nbsp;fichier JSON" style="html=1;" parent="30" vertex="1">
+                    <mxGeometry x="343" y="33" width="110" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" style="edgeStyle=none;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="30" source="11" target="13" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="Construction des&lt;br&gt;questions&lt;br&gt;(langage naturel)" style="html=1;" parent="30" vertex="1">
+                    <mxGeometry x="540" y="122" width="110" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="30" source="11" target="16" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="Traitement de&lt;br&gt;question" style="html=1;" parent="30" vertex="1">
+                    <mxGeometry x="540" y="30" width="110" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" style="edgeStyle=none;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="30" source="16" target="18" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="Choix / Vérification&lt;br&gt;proposition" style="html=1;" parent="30" vertex="1">
+                    <mxGeometry x="97" y="36" width="110" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" style="edgeStyle=none;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="30" source="4" target="20" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="Suppression d'un&lt;br&gt;perso du tableau +&lt;br&gt;retirer liste choix" style="html=1;" parent="30" vertex="1">
+                    <mxGeometry x="220" y="208" width="110" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" style="edgeStyle=none;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="30" source="4" target="22" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="Auto abaissement&lt;br&gt;des persos" style="html=1;" parent="30" vertex="1">
+                    <mxGeometry x="463" y="362" width="110" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="27" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="30" source="25" target="24" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="Savoir combien de&lt;br&gt;persos éliminés" style="html=1;" parent="30" vertex="1">
+                    <mxGeometry x="277" y="362" width="110" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="30" source="9" target="25" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" value="Passer à 5 essais&lt;br&gt;(- le nombre &lt;br&gt;déjà utilisé)" style="html=1;" parent="30" vertex="1">
+                    <mxGeometry x="97" y="474" width="110" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="29" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="30" source="9" target="28" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="37" value="Plus tard" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=#6F0000;fillColor=#a20025;fontColor=#ffffff;" parent="30" vertex="1">
+                    <mxGeometry x="123.5" y="302" width="57" height="18" as="geometry"/>
+                </mxCell>
+                <mxCell id="38" value="" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fillColor=#a20025;strokeColor=#6F0000;strokeWidth=3;endArrow=none;" parent="30" source="4" target="37" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="971" y="378" as="sourcePoint"/>
+                        <mxPoint x="971" y="568" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="31" value="Répartition tâches" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
+                    <mxGeometry x="574" y="474" width="140" height="134" as="geometry"/>
+                </mxCell>
+                <mxCell id="32" value="Romain" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=1;fontColor=#33FFFF;" parent="31" vertex="1">
+                    <mxGeometry y="26" width="140" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="33" value="Morgan" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=1;fontColor=#B266FF;" parent="31" vertex="1">
+                    <mxGeometry y="52" width="140" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="34" value="Eric&#10;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=1;fontColor=#99FF33;" parent="31" vertex="1">
+                    <mxGeometry y="78" width="140" height="28" as="geometry"/>
+                </mxCell>
+                <mxCell id="35" value="Lisa" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=1;fontColor=#FFFF00;" parent="31" vertex="1">
+                    <mxGeometry y="106" width="140" height="28" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

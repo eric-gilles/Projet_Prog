@@ -14,7 +14,7 @@ function Affichage(){
         html += "<tr>";
         for(let j=0; j<=5; j++){
             if(nbElement>0){
-                html += "<td><img src='avatar.jpg' class='avatar'></td>";
+                html += "<td><img src='http://localhost:8888/fichier/avatar.jpg' class='avatar'></td>";
                 nbElement--;
             }
         }

@@ -36,5 +36,4 @@ function changeImage(img){
         img.src = "https://raw.githubusercontent.com/eric-gilles/Projet_Prog/main/Codes/avatar.jpg";
         img.classList.toggle('rotated');
     }
-
 }

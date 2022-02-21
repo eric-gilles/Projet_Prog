@@ -41,3 +41,19 @@ img{
     text-align: center;
     top:0%;
 }
+
+body {
+    font-family: 'ABeeZee';font-size: 22px;
+}
+
+/*css bouton*/
+input{
+    border-radius: 15px;
+    width: 150px;
+    height:auto;
+    transition: all 500ms ease-out;
+}
+input:hover{
+    background-color: rgb(189, 189, 189);
+    
+}

@@ -58,4 +58,3 @@ for (o of json.personnages) {
 var res = 10;
 html += "</select>";
 document.getElementById("question1").innerHTML = html;
-//$("#attr1").append(html);
