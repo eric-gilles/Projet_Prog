@@ -1,4 +1,4 @@
-
+var x = 1;
 $(document).ready(function() {
     
     var max_questions = 10;
@@ -25,7 +25,7 @@ $(document).ready(function() {
                     html+="<option id="+a+">"+a+"</option>";
                     nbAttr++;
                 }
-            $(div).append('<div><select>\n\t<option>ET</option>\n\t<option>OU</option>\n</select>\n<br>Est-ce que <select id="attr"'+x+'">'+html+'</select><select id="value"'+x+'></select>?<a href="#" class="delete">supprimer</a></select></div>'); //add select
+            $(div).append('<div><select>\n\t<option>ET</option>\n\t<option>OU</option>\n</select>\n<br>Est-ce que <select id="attr"'+x+'" onchange="selectVal()">'+html+'</select><select id="value"'+x+'></select>?<a href="#" class="delete">supprimer</a></select></div>'); //add select
         } else alert('Vous avez assez de questions là! Ca va oui non mais Oh! Vous vous croyez où ?')
     });
 }); 
@@ -34,45 +34,46 @@ $(document).ready(function() {
         e.preventDefault();
         $(this).parent('div').remove();
         x--;
-    });
-    //prend toutes les valeurs possibles pour l'attribut selectionné :
+    });   
+});
+function selectVal(){ 
     var value=[]; 
     var html="";
+    var cptValeur=0;
+    var Selected;
     $.getJSON("http://localhost:8888/test.json", function(data){
         for(let i=0;i<x;i++){ //on boucle sur le nombre de question que l'on a
-            var Selected=$("#attr"+i).val(); 
-            for(let p in data.personnages){
-                for(let a in data.personnages[p].attributs){
-                    if(Selected==a){
-                        console.log("Tableau Vide? réponse ->")
-                        console.log(value.length==0);
-                        if(value.length==0){
-                            
-                            value.push(data.personnages[p].attributs[a]);
-                            html+="<option id=valeur"+i+">"+data.personnages[p].attributs[a]+"</option>";
-                        }
-                        else{ 
-                            console.log("testons: "); 
-                            // for(let k in value){
-                            //     console.log(k);
-                            //     console.log(value[k]+"!="+data.personnages[p].attributs[a]+"?");
-                                console.log("appartient pas?"+data.personnages[p].attributs[a]);
-                                console.log(!value.includes(data.personnages[p].attributs[a]));
-                                if(!value.includes(data.personnages[p].attributs[a])){ 
-                                    console.log("j'ajoute: "+data.personnages[p].attributs[a]); 
-                                    value.push(data.personnages[p].attributs[a]);
-                                    html+="<option id=valeur"+i+">"+data.personnages[p].attributs[a]+"</option>";
-                                }      
-                            // }
+            $("#valeur"+i+">option").remove();
+            Selected=$("#attr"+i).val(); 
+            for(let p of data.personnages){
+                for(let a in p.attributs){
+                    if(Selected==a){ //si l'attribut selectionné correspond alors...
+                        
+                        if(value.length==0){ //si le tableau est vide alors je rentre la valeur
+                            for(valeur of p.attributs[a]){
+                                
+                                value.push(valeur);
+                                html+="<option id=valeur"+i+">"+valeur+"</option>";
+                            }
                         } 
-                    }
-                    // console.log(value);
-                    $("valeur"+i).append(html); 
+                        else{
+                            // console.log("testons: "); 
+                            for(valeur of p.attributs[a]){
+                                // console.log("Est ce que "+valeur+" est pas dans le tableau?");
+                                // console.log(!value.includes(valeur));
+                                if(!value.includes(valeur)){ 
+                                    // console.log("j'ajoute: "+valeur); 
+                                    value.push(valeur);
+                                    html+="<option id=valeur"+cptValeur+">"+valeur+"</option>";
+                                    cptValeur++;
+                                }
+                            } 
+                        } 
+                    } 
                 }  
             }
+            $("#valeur"+i).append(html);
         }
-
     });
-     
-});
+}
 
