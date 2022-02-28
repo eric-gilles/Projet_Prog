@@ -1,0 +1,35 @@
+h1{
+    text-align: center;
+}
+#Personnages{
+    border: solid;
+}
+#main{
+    border:solid;
+}
+img{
+    width: 150px;
+    height: auto;
+}
+.button {
+    width:100px;
+    
+}
+#mode{
+    background-image:linear-gradient(rgb(0, 13, 126),rgb(4, 0, 255));
+    color:white;
+}
+#mode:hover{
+    background-image:linear-gradient(rgb(6, 0, 92),rgb(0, 4, 212));
+    cursor: pointer;
+}
+ #Valider{
+    height: 50px;
+    background-image:linear-gradient(rgb(0, 126, 31),rgb(0, 255, 0));
+    color:white;
+    position: relative; 
+}
+#Valider:hover{
+    background-image:linear-gradient(rgb(0, 92, 28),rgb(0, 212, 64));
+    cursor: pointer;
+} 
