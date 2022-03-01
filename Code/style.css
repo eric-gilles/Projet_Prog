@@ -6,6 +6,7 @@ h1{
 }
 #main{
     border:solid;
+    background: linear-gradient(rgb(255, 255, 255), #f81212);
 }
 .logo{
     width: 80%;
@@ -24,6 +25,7 @@ h1{
 .grille{
     margin:5%;
     height: 100%;
+    min-height: 150px;
     width: auto;
     background: linear-gradient(rgb(250, 253, 60), #fceb00);
 }
@@ -43,10 +45,10 @@ h1{
     animation: rotate;
     border-width: 4px;
     object-fit: cover;
+    transition: all 1000ms ease-out;
 }
 .rotated:hover {
-    transform: rotate3d(0,1,0,80deg);
-    animation-duration: 1s;
+    transform: rotate3d(0,1,0,89deg);
 }
 .proposition{
     margin-top:0%;
@@ -86,5 +88,17 @@ img:not(.logo) {
     max-height: 100%;
     width: 100%;
 }
+input[type=button] {
+    transition-duration: 0.5s;
+    border: 2px solid #b83333;
+    border-radius: 5px;
+    font-size: 100%;  
+    background-color: #ffffff;
+  }
+  
+input[type=button]:hover {
+    background-color: #8deb75;
+    color: rgb(0, 0, 0);
+  }
 
 td:hover {background-color: rgba(255, 124, 2, 0.281);}
