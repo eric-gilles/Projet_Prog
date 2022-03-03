@@ -4,28 +4,35 @@ function randomInt(max) {
 }
 
 
-
-var indexBonneReponse = 0;
+var ModeDouble=false;
+var persoCache1 = 0;
+var persoCache2 = 0;
 var jsonObject;
 //On fixe le nombre d'essais du mode Normal
 const nbEssaisNormal = 3;
 var nbEssais = nbEssaisNormal;
+var nbrePerso = 0;
 
 
 
-
-//Choix du personnage caché, son index sera placé dans "indexBonneReponse"
+//Choix du personnage caché, son index sera placé dans "persoCache1"
 //Cette fonction ajoute aussi un variable "jsonObject" qui contient l'objet json parsé
 function ChoixPersonnage(json){
-    var nbrePerso = 0;
+    
     for ( p of json.personnages){  
         nbrePerso+=1;   
     }   
-    indexBonneReponse = randomInt(nbrePerso); 
+    persoCache1 = randomInt(nbrePerso); 
     jsonObject = json;
-    console.log("La bonne réponse est :"+indexBonneReponse);
-    return indexBonneReponse;
+    console.log("La bonne réponse est :"+persoCache1);
+    return persoCache1;
 }
+function ChoixPersonnage2(){
+    do{
+        persoCache2=randomInt(nbrePerso);
+    }
+    while(persoCache1==persoCache2)  
+} 
 
 
 
@@ -35,7 +42,8 @@ function ChoixPersonnage(json){
 function LancementFacile(){
     document.getElementById("MODE FACILE").remove();
     nbEssais += 2;
-} 
+}
+ 
 
 
 
@@ -73,23 +81,19 @@ function TestPerso(){
     var select = document.getElementById('essai');
     console.log("Nombre d'essais restants: "+nbEssais);
     console.log("La réponse actuel est : "+select.selectedIndex-1);
-    console.log("La bonne réponse est: "+indexBonneReponse);
-    if ((select.selectedIndex-1 == indexBonneReponse)&&(nbEssais>0)){
+    console.log("La bonne réponse est: "+persoCache1);
+    if ((select.selectedIndex-1 == persoCache1)&&(nbEssais>0)){
         alert("Bravo ! Vous avez gagnez !");
     }else if (nbEssais==0){
-        if (confirm("Fin du Jeu ! Perdu ! La bonne réponse était: "+jsonObject.personnages[indexBonneReponse].nom)){
+        if (confirm("Fin du Jeu ! Perdu ! La bonne réponse était: "+jsonObject.personnages[persoCache1].nom)){
             nbEssais = nbEssaisNormal;
         }
     }
     else{
         nbEssais--;
-        if (nbEssais==0){
-            if (confirm("Fin du Jeu ! Perdu ! La bonne réponse était: "+jsonObject.personnages[indexBonneReponse].nom)){
-                nbEssais = nbEssaisNormal;
-            }
-        }
     }
     $("#NbEssai").empty();
+    console.log("Nombre d'essai restants :"+document.getElementById("NbEssai"));
     document.getElementById("NbEssai").append("Nombre de tentatives restantes: "+nbEssais);
 }
 
@@ -101,7 +105,7 @@ function TestPerso(){
 //Intialise les questions que pourra poser le joueur (la 1ère liste déroulante)
 function InitialisationQuestion(){
     $(document).ready(function() {
-        var x = 0;
+        var x = 1;
         var max_questions = 10;
         var div = $("#Questions");
         var add_button = $("#addquestion");
@@ -204,13 +208,28 @@ function traitement(nbQuestions){
             }         
         } 
     }
+    $("#reponse").empty();
+    if(reponse){
+        $("#reponse").append("VRAI");
+    }
+    else{
+        $("#reponse").append("FALSE");
+    } 
+    
     console.log("réponse finale pour une question : "+reponse);
 } 
 
 function TraitementUneQuestion(SelectedAttributs,SelectedValue){
     reponse = false;
-    for(let value of jsonObject.personnages[indexBonneReponse].attributs[SelectedAttributs]){
+    for(let value of jsonObject.personnages[persoCache1].attributs[SelectedAttributs]){
         reponse=(reponse ||  (value==SelectedValue));
     }
     return reponse
-} 
+}
+function LancementDoublePersonnages(){
+    $("#boutonDouble").remove();
+    ChoixPersonnage2();
+    console.log("Personnage caché 1 :"+persoCache1);
+    console.log("Personnage caché 2 :"+persoCache2);
+    ModeDouble=true;
+}  
