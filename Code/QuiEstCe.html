@@ -10,6 +10,7 @@
     <script src="http://localhost:8888/fichier/AffichagePerso.js"></script>
     <script src="http://localhost:8888/fichier/CréationQuestion.js"></script>
     <script src="http://localhost:8888/fichier/ModeFacile.js"></script>
+    <script src="http://localhost:8888/fichier/choixPersonnage.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee">
     <link rel="stylesheet" href="http://localhost:8888/fichier/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -34,13 +35,16 @@
                             </div>
                             <div class="col-6 col-md-12"><br/>    
                                 Je pense qu'il s'agit de : <br/>
-                                <select id="essai" onchange="TestPerso()">
+                                <select id="essai" onchange="AfficherPersoEssais()">
                                     <!-- les options avec les balises <option></option>-->
-                                </select><br/>
+                                </select><br/><br/>
+                                <img src='' id='ImagePersoTentative' class="persoTentative"><br/><br/>
+                                <input onclick="TestPerso()" type="button" value="Valider">
                             </div>
                             <div class="col-3 col-md-12">
                                 <div class="facile"><br>
-                                    <input onclick="LancementFacile()" type="button" value="MODE FACILE">
+                                    <input onclick="LancementFacile()" type="button" value="MODE FACILE" id="MODE FACILE">
+                                    <p id="NbEssai">Nombre de tentatives restantes: 3</p></br>
                                 </div>
                             </div>
                         </div>
@@ -61,7 +65,7 @@
                         </select> ?
                     </div>
                 </div>
-                <input type="button" id="valider" value="VALIDER">   
+                <input type="button" id="valider" value="VALIDER" onclick="traitement(1)">   
             </div>
             <input type="button" value="Ajout Question" id="addquestion">
         </div>
@@ -81,8 +85,12 @@
                 var parsed = JSON.parse(e.target.result);
                 Affichage(parsed);
                 ChoixPersonnage(parsed);
+                GenerationChoix(parsed);
+                importJSON(parsed);
             }
             fr.readAsText(files.item(0));
+            document.getElementById('file').remove();
+            document.getElementById('import').remove();
         };
     </script>
 </body>
