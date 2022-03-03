@@ -8,9 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="http://localhost:8888/fichier/AffichagePerso.js"></script>
-    <script src="http://localhost:8888/fichier/CréationQuestion.js"></script>
-    <script src="http://localhost:8888/fichier/ModeFacile.js"></script>
-    <script src="http://localhost:8888/fichier/choixPersonnage.js"></script>
+    <script src="http://localhost:8888/fichier/Fonction.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee">
     <link rel="stylesheet" href="http://localhost:8888/fichier/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -57,7 +55,7 @@
                 <div id="Questions">
                     <div id="question0">
                         Est-ce que
-                        <select id="attr0" onchange="selectVal(0)">
+                        <select id="attr0"  onchange="selectVal(0)">
                             <!-- les options -->
                         </select>
                         <select id="valeur0">
@@ -86,7 +84,7 @@
                 Affichage(parsed);
                 ChoixPersonnage(parsed);
                 GenerationChoix(parsed);
-                importJSON(parsed);
+                InitialisationQuestion(parsed);
             }
             fr.readAsText(files.item(0));
             document.getElementById('file').remove();
