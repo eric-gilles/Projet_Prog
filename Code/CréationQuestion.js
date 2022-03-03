@@ -1,5 +1,5 @@
 
-var json={
+var json2={
     "personnages": [
         { "son nom est": "Jeanne", "image":"avatar.jpg","attributs": { "ses cheveux sont": ["blonds"], "ses yeux sont": ["marrons"], "sa peau est": ["blanche"], "son sexe est": ["femme"], "ce personnage est": ["agé"] } },
         { "son nom est": "Margot", "image":"avatar.jpg","attributs": { "ses cheveux sont": ["rose", "bleu"], "ses yeux sont": ["noirs"], "sa peau est": ["blanche"], "son sexe est": ["femme"], "ce personnage est": ["jeune"] } },
@@ -7,7 +7,7 @@ var json={
         { "son nom est": "George", "image":"avatar.jpg","attributs": { "ses cheveux sont": ["blonds"], "ses yeux sont": ["verts", "bleus"], "sa peau est": ["blanche"], "son sexe est": ["homme"], "ce personnage est": ["un enfant"] } }
     ]
 };
-var IndexPersonnage=ChoixPersonnage(json);
+var IndexPersonnage=ChoixPersonnage(json2);
 var x = 1;
 $(document).ready(function() {
     var max_questions = 10;
@@ -21,6 +21,7 @@ $(document).ready(function() {
             $("#attr0").append(html1);
         }
     });
+
     $(add_button).click(function(e) {
         e.preventDefault();
         console.log(x);
@@ -42,6 +43,7 @@ $(document).ready(function() {
         e.preventDefault();
         $(this).parent('div').remove();
         x--;
+        $("#valider").attr("onclick","traitement("+x+")");
     }); 
 });
 function randomInt(max) {
@@ -92,114 +94,133 @@ function selectVal(i){
         $("#valeur"+i).append(html);
     });
 }
-
+function getJSON(json){ //j'avais des problème sur le onclick pour avoir le json du coup j'ai fait ça (Romain tu te débrouilles pour m'envoyer le json :D ) c'était globalement les mêmes problèmes que pour choixPersonnage
+    return json;
+} 
 //ça fonctionne à peu près, c'est bien mais pas ouf quand même
 function traitement(nbQuestions){
-    // $("#reponse").remove();
     console.log(IndexPersonnage);
     let reponse=false;
+    json=getJSON(json2);
     if(nbQuestions==1){ //pour une question
-        SelectedAttributs=$("#attr0").val();
-        SelectedValue=$("#valeur0").val();
-        $.getJSON("http://localhost:8888/test.json", function(data){
-            for(let p in data.personnages){
-                if(p==IndexPersonnage){
-                    for(let a in data.personnages[p].attributs){
-                        if(a==SelectedAttributs){
-                            for(let value of data.personnages[p].attributs[a]){
-                                reponse=(value==SelectedValue);    
-                            } 
-                        }
-                    } 
-                }
+    SelectedAttributs=$("#attr0").val();
+    SelectedValue=$("#valeur0").val();
+        for(let p in json.personnages){
+            if(p==IndexPersonnage){
+                for(let a in json.personnages[p].attributs){
+                    if(a==SelectedAttributs){
+                        for(let value of json.personnages[p].attributs[a]){
+                            reponse=reponse ||  (value==SelectedValue);   
+                        } 
+                    }
+                } 
             }
-        console.log("Non en faite je suis là: "+reponse);
-
-        if(reponse){
-            $("#reponse").append("ouai bon c'est vrai");
         }
-        else{
-            $("#reponse").append("t'es trop con j'ai juré");
-        } 
-        
-        });
+    console.log("réponse finale pour une question : "+reponse);
+    /* VOUS VOYEZ CE TRUC BEN CA FONCTIONNE PAS !!
+    if(reponse){
+        $("reponse").append("VRAI");
     }
-    else{ //pour plusieurs question (c'est chiant)
-        reponse=traitement2a2(0,1);
+    else{
+        $("reponse").append("FAUX");
+    } */
+         
+    }
+    else{ //pour plusieurs question 
+        reponse=traitement2a2(0,1,json);
+        let reponseInt=false;
         for(let i=2;i<nbQuestions;i++){
             SelectedAttributs=$("#attr"+i).val();
             SelectedValue=$("#valeur"+i).val();
             if($("#"+i).val()=="ET"){
-                $.getJSON("http://localhost:8888/test.json", function(data){
-                    for(let p in data.personnages){
+                    for(let p in json.personnages){
                         if(p==IndexPersonnage){
-                            for(let a in data.personnages[p].attributs){
-                                if(data.personnages[p].attributs[a]==SelectedAttributs1){
-                                    reponse=reponse && data.personnages[p].attributs[a].includes(SelectedValue);
-                                }
-                            }
+                            for(let a in json.personnages[p].attributs){
+                                if(a==SelectedAttributs){
+                                    for(let value of json.personnages[p].attributs[a]){
+                                        reponseInt=reponseInt ||  (value==SelectedValue);
+                                    } 
+                                reponse=reponse && reponseInt;
+                                console.log("Le ET de plusieurs questions "+reponse);
+                            }   
                         }
-                    }  
-                });
+                    }
+                }  
             }
             else{
-                $.getJSON("http://localhost:8888/test.json", function(data){
-                    for(let p in data.personnages){
-                        if(p==IndexPersonnage){
-                            for(let a in data.personnages[p].attributs){
-                                if(data.personnages[p].attributs[a]==SelectedAttributs){
-                                    reponse=reponse || data.personnages[p].attributs[a].includes(SelectedValue);
-                                }
+                for(let p in json.personnages){
+                    if(p==IndexPersonnage){
+                        for(let a in json.personnages[p].attributs){
+                            if(a==SelectedAttributs){
+                                for(let value of json.personnages[p].attributs[a]){
+                                    reponseInt=reponseInt ||  (value==SelectedValue);
+                                } 
+                            reponse=reponse ||  reponseInt;
+                            console.log("Le OU de plusieurs questions "+reponse);
                             }
                         }
-                    }  
-                });
+                    }
+                }  
             }         
         }
-        $("#reponse").append(reponse); 
+        /* VOUS VOYEZ CE TRUC BEN CA FONCTIONNE TOUJOURS PAS !!
+        if(reponse){
+            $("reponse").append("VRAI");
+        }
+        else{
+            $("reponse").append("FAUX");
+        } */ 
     }
 } 
-function traitement2a2(indice1,indice2){
+//ça fonctionne pas mal ce truc en faite
+function traitement2a2(indice1,indice2,json){
     let SelectedAttributs1=$("#attr"+indice1).val();
     let SelectedValue1=$("#valeur"+indice1).val();
     let SelectedAttributs2=$("#attr"+indice2).val();
     let SelectedValue2=$("#valeur"+indice2).val();
     let reponse=false;
+    let reponseInt=false
         if($("#"+indice2).val()=="ET"){
-            $.getJSON("http://localhost:8888/test.json", function(data){
-                for(let p in data.personnages){
-                    if(p==IndexPersonnage){
-                        for(let a in data.personnages[p].attributs){
-                            if(data.personnages[p].attributs[a]==SelectedAttributs1){
-                                reponse=data.personnages[p].attributs[a].includes(SelectedValue1);
-                            }
+            for(let p in json.personnages){
+                if(p==IndexPersonnage){
+                    for(let a in json.personnages[p].attributs){
+                        if(a==SelectedAttributs){
+                            for(let value of json.personnages[p].attributs[a]){
+                                reponseInt=reponseInt ||  (value==SelectedValue1);   
+                            } 
                         }
-                        for(let a in data.personnages[p].attributs){
-                            if(data.personnages[p].attributs[a]==SelectedAttributs2){
-                                reponse =reponse && data.personnages[p].attributs[a].includes(SelectedValue2);
+                    }
+                    for(let a in json.personnages[p].attributs){
+                        if(a==SelectedAttributs2){
+                            for(let value of json.personnages[p].attributs[a]){
+                                reponse=reponse ||  (value==SelectedValue2);                                    
                             }
                         }
                     }
                 }
-            });    
-        }
-        else{
-            $.getJSON("http://localhost:8888/test.json", function(data){
-                for(let p in data.personnages){
-                    if(p==IndexPersonnage){
-                        for(let a in data.personnages[p].attributs){
-                            if(data.personnages[p].attributs[a]==SelectedAttributs1){
-                                reponse=data.personnages[p].attributs[a].includes(SelectedValue1);
-                            }
-                        }
-                        for(let a in data.personnages[p].attributs){
-                            if(data.personnages[p].attributs[a]==SelectedAttributs2){
-                                reponse= (reponse ||  data.personnages[p].attributs[a].includes(SelectedValue2));
-                            }
+            }
+        reponse=reponse&&reponseInt;        
+    }
+    else{
+        for(let p in json.personnages){
+            if(p==IndexPersonnage){
+                for(let a in json.personnages[p].attributs){
+                    if(a==SelectedAttributs1){
+                        for(let value of json.personnages[p].attributs[a]){
+                            reponseInt=reponseInt ||  (value==SelectedValue1);
+                        }                           
+                    }
+                }
+                for(let a in json.personnages[p].attributs){
+                    if(a==SelectedAttributs2){
+                        for(let value of json.personnages[p].attributs[a]){
+                            reponseInt=reponseInt ||  (value==SelectedValue1);
                         }
                     }
                 }
-            });
+            }
         }
-    return reponse;
+        reponse=reponse||reponseInt;
+    }
+    return reponse
 }
