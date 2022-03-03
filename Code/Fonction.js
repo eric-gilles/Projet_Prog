@@ -61,7 +61,7 @@ function AfficherPersoEssais(){
     console.log("changement affichage : perso tentative");
     document.getElementById("ImagePersoTentative").src = jsonObject.personnages[select.selectedIndex-1].image;
     $("#NbEssai").empty();
-    document.getElementById("NbEssai").append("Nombre de tenetatives restantes: "+nbEssais);
+    document.getElementById("NbEssai").append("Nombre de tentatives restantes: "+nbEssais);
 } 
 
 
@@ -83,10 +83,14 @@ function TestPerso(){
     }
     else{
         nbEssais--;
+        if (nbEssais==0){
+            if (confirm("Fin du Jeu ! Perdu ! La bonne réponse était: "+jsonObject.personnages[indexBonneReponse].nom)){
+                nbEssais = nbEssaisNormal;
+            }
+        }
     }
     $("#NbEssai").empty();
-    console.log("Nombre d'essai restants :"+document.getElementById("NbEssai"));
-    document.getElementById("NbEssai").append("Nombre de tenetatives restantes: "+nbEssais);
+    document.getElementById("NbEssai").append("Nombre de tentatives restantes: "+nbEssais);
 }
 
 
@@ -97,6 +101,7 @@ function TestPerso(){
 //Intialise les questions que pourra poser le joueur (la 1ère liste déroulante)
 function InitialisationQuestion(){
     $(document).ready(function() {
+        var x = 0;
         var max_questions = 10;
         var div = $("#Questions");
         var add_button = $("#addquestion");
