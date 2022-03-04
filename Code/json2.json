@@ -13,6 +13,7 @@
         { "nom": "Morgane", "image": "https://raw.githubusercontent.com/eric-gilles/Projet_Prog/main/images/jsonchat/morgane.jpg", "attributs": { "a/ont un pelage": ["blanc","noir","multicolore"], "a/ont des yeux": ["oranges"], "a/ont des poils": ["courts"], "a/ont un nez": ["rose"]} },
         { "nom": "Redolfe", "image": "https://raw.githubusercontent.com/eric-gilles/Projet_Prog/main/images/jsonchat/redolfe.jpg", "attributs": { "a/ont un pelage": ["multicolore"], "a/ont des yeux": ["jaunes"], "a/ont des poils": ["longs"], "a/ont un nez": ["rose"]} },
         { "nom": "Joseph", "image": "https://raw.githubusercontent.com/eric-gilles/Projet_Prog/main/images/jsonchat/joseph.png", "attributs": { "a/ont un pelage": ["roux","gris","multicolore"], "a/ont des yeux": ["verts"], "a/ont des poils": ["longs"], "a/ont un nez": ["marron"]} },
-        { "nom": "Elian", "image": "https://raw.githubusercontent.com/eric-gilles/Projet_Prog/main/images/jsonchat/elian.jpg", "attributs": { "a/ont un pelage": ["multicolore"], "a/ont des yeux": ["verts"], "a/ont des poils": ["courts"], "a/ont un nez": ["rose"]} }
+        { "nom": "Elian", "image": "https://raw.githubusercontent.com/eric-gilles/Projet_Prog/main/images/jsonchat/elian.jpg", "attributs": { "a/ont un pelage": ["multicolore"], "a/ont des yeux": ["verts"], "a/ont des poils": ["courts"], "a/ont un nez": ["rose"]} },
+        { "nom":"Kevin", "image": "https://raw.githubusercontent.com/eric-gilles/Projet_Prog/main/images/jsonchat/kevin.jpg", "attributs": { "a/ont un pelage": ["blanc"], "a/ont des yeux": ["bleus"], "a/ont des poils": ["longs"], "a/ont un nez": ["rose"]}}
     ]
 }
