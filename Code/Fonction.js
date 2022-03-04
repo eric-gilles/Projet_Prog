@@ -4,46 +4,29 @@ function randomInt(max) {
 }
 
 
-var ModeDouble=false;
-var persoCache1 = 0;
-var persoCache2 = 0;
+
+var indexBonneReponse = 0;
 var jsonObject;
 //On fixe le nombre d'essais du mode Normal
 const nbEssaisNormal = 3;
 var nbEssais = nbEssaisNormal;
-var nbrePerso = 0;
+var ModeFacile = false;
 
 
 
-//Choix du personnage caché, son index sera placé dans "persoCache1"
+//Choix du personnage caché, son index sera placé dans "indexBonneReponse"
 //Cette fonction ajoute aussi un variable "jsonObject" qui contient l'objet json parsé
 function ChoixPersonnage(json){
-    
+    var nbrePerso = 0;
     for ( p of json.personnages){  
         nbrePerso+=1;   
     }   
-    persoCache1 = randomInt(nbrePerso); 
+    indexBonneReponse = randomInt(nbrePerso); 
     jsonObject = json;
-    console.log("La bonne réponse est :"+persoCache1);
-    return persoCache1;
+    console.log("La bonne réponse est :"+indexBonneReponse);
+    $("#valider").attr("onclick","traitement(1,"+indexBonneReponse+"),RetournementAutomatique()");
+    return indexBonneReponse;
 }
-function ChoixPersonnage2(){
-    do{
-        persoCache2=randomInt(nbrePerso);
-    }
-    while(persoCache1==persoCache2)  
-} 
-
-
-
-
-
-//Fonction qui lance le mode facile (en cours)
-function LancementFacile(){
-    document.getElementById("MODE FACILE").remove();
-    nbEssais += 2;
-}
- 
 
 
 
@@ -67,7 +50,12 @@ function GenerationChoix(json){
 function AfficherPersoEssais(){
     var select = document.getElementById('essai');
     console.log("changement affichage : perso tentative");
-    document.getElementById("ImagePersoTentative").src = jsonObject.personnages[select.selectedIndex-1].image;
+    if(jsonObject.personnages[select.selectedIndex-1] == null){
+        document.getElementById("ImagePersoTentative").src = "";
+    } 
+    else{
+        document.getElementById("ImagePersoTentative").src = jsonObject.personnages[select.selectedIndex-1].image;
+    } 
     $("#NbEssai").empty();
     document.getElementById("NbEssai").append("Nombre de tentatives restantes: "+nbEssais);
 } 
@@ -81,19 +69,23 @@ function TestPerso(){
     var select = document.getElementById('essai');
     console.log("Nombre d'essais restants: "+nbEssais);
     console.log("La réponse actuel est : "+select.selectedIndex-1);
-    console.log("La bonne réponse est: "+persoCache1);
-    if ((select.selectedIndex-1 == persoCache1)&&(nbEssais>0)){
+    console.log("La bonne réponse est: "+indexBonneReponse);
+    if ((select.selectedIndex-1 == indexBonneReponse)&&(nbEssais>0)){
         alert("Bravo ! Vous avez gagnez !");
     }else if (nbEssais==0){
-        if (confirm("Fin du Jeu ! Perdu ! La bonne réponse était: "+jsonObject.personnages[persoCache1].nom)){
+        if (confirm("Fin du Jeu ! Perdu ! La bonne réponse était: "+jsonObject.personnages[indexBonneReponse].nom)){
             nbEssais = nbEssaisNormal;
         }
     }
     else{
         nbEssais--;
+        if (nbEssais==0){
+            if (confirm("Fin du Jeu ! Perdu ! La bonne réponse était: "+jsonObject.personnages[indexBonneReponse].nom)){
+                nbEssais = nbEssaisNormal;
+            }
+        }
     }
     $("#NbEssai").empty();
-    console.log("Nombre d'essai restants :"+document.getElementById("NbEssai"));
     document.getElementById("NbEssai").append("Nombre de tentatives restantes: "+nbEssais);
 }
 
@@ -125,9 +117,14 @@ function InitialisationQuestion(){
                     for(let a in jsonObject.personnages[0].attributs){
                         html+="<option id='"+a+"'>"+a+"</option>";
                     }
-                    $(div).append('<div><select id="c'+(x-1)+'">\n\t<option>ET</option>\n\t<option>OU</option>\n</select>\n<br>Est-ce que <select id="attr'+(x-1)+'" onchange="">'+html+'</select><select id="valeur'+(x-1)+'"></select>?<a href=# class=delete>supprimer</a></select></div>'); //add select     
+                    let htmlBis = '<div> <select id="c'+(x-1)+'">'; //Création du select du ET | OU
+                    htmlBis += '<option>ET</option> <option>OU</option> </select>'; //Création des options du ET | OU
+                    htmlBis += '</br>Est-ce que <select id="attr'+(x-1)+'">'; //Création de la partie 1 de la question
+                    htmlBis += html+'</select><select id="valeur'+(x-1)+'"></select> ?'; //Création de la partie 2 de la question
+                    htmlBis += '<a href=# class=delete>supprimer</a> </select> </div>'; //Création du bouton de suppression
+                    $(div).append(htmlBis); //add select
                     $("#attr"+(x-1)).attr("onchange","selectVal("+(x-1)+")");
-                    $("#valider").attr("onclick","traitement("+x+")");
+                    $("#valider").attr("onclick","traitement("+x+","+indexBonneReponse+"),RetournementAutomatique()");
             } else alert('Vous avez assez de questions là! Ca va oui non mais Oh! Vous vous croyez où ?')
         });
     
@@ -135,7 +132,7 @@ function InitialisationQuestion(){
             e.preventDefault();
             $(this).parent('div').remove();
             x--;
-            $("#valider").attr("onclick","traitement("+x+")");
+            $("#valider").attr("onclick","traitement("+x+","+indexBonneReponse+"),RetournementAutomatique()");
         }); 
     });
 } 
@@ -161,7 +158,7 @@ function selectVal(i){
                 if(value.length==0){ //si le tableau est vide alors je rentre la valeur
                     for(valeur of p.attributs[a]){        
                         value.push(valeur);
-                        html+="<option id='value"+cptValeur+"'>"+valeur+"</option>";
+                        html+="<option id='value"+i+"."+cptValeur+"'>"+valeur+"</option>";
                         cptValeur++;
                     }
                 } 
@@ -169,7 +166,7 @@ function selectVal(i){
                     for(valeur of p.attributs[a]){
                         if(!value.includes(valeur)){ 
                             value.push(valeur);
-                            html+="<option id='value"+cptValeur+"'>"+valeur+"</option>";
+                            html+="<option id='value"+i+"."+cptValeur+"'>"+valeur+"</option>";
                             cptValeur++;   
                         }
                     } 
@@ -187,49 +184,110 @@ function selectVal(i){
 
 
 //Logique des questions : rend une valeur booléenne
-function traitement(nbQuestions){
+function traitement(nbQuestions,indexVerif){
     SelectedAttributs=$("#attr0").val();
     SelectedValue=$("#valeur0").val();
-    let reponse = TraitementUneQuestion(SelectedAttributs,SelectedValue);
+    let reponse = TraitementUneQuestion(SelectedAttributs,SelectedValue,indexVerif);
     //console.log("réponse finale pour une question : "+reponse);         
     if(nbQuestions > 1){ //pour plusieurs questions
-        console.log("plusieurs questions");
         for(let i=1;i<nbQuestions;i++){
             SelectedAttributs=$("#attr"+i).val();
             SelectedValue=$("#valeur"+i).val();
-            console.log(document.getElementById("c"+i));
             if(document.getElementById("c"+i).options[document.getElementById("c"+i).selectedIndex].value=="ET"){
-                reponse=(reponse && TraitementUneQuestion(SelectedAttributs,SelectedValue));
+                reponse=(reponse && TraitementUneQuestion(SelectedAttributs,SelectedValue,indexVerif));
                 //console.log("Le ET de plusieurs questions "+reponse);
             }   
             else{
-                reponse=(reponse ||  TraitementUneQuestion(SelectedAttributs,SelectedValue));
+                reponse=(reponse ||  TraitementUneQuestion(SelectedAttributs,SelectedValue,indexVerif));
                 //console.log("Le OU de plusieurs questions "+reponse);
             }         
         } 
     }
-    $("#reponse").empty();
-    if(reponse){
-        $("#reponse").append("VRAI");
-    }
-    else{
-        $("#reponse").append("FALSE");
-    } 
-    
-    console.log("réponse finale pour une question : "+reponse);
+    console.log("La réponse à la question est: "+reponse);
+    return reponse;
 } 
 
-function TraitementUneQuestion(SelectedAttributs,SelectedValue){
+//Permet de traiter la valeur booléenne d'une unique question
+function TraitementUneQuestion(SelectedAttributs,SelectedValue,indexVerif){
     reponse = false;
-    for(let value of jsonObject.personnages[persoCache1].attributs[SelectedAttributs]){
+    for(let value of jsonObject.personnages[indexVerif].attributs[SelectedAttributs]){
         reponse=(reponse ||  (value==SelectedValue));
     }
+    console.log(jsonObject.personnages[indexVerif].nom+": "+SelectedAttributs+" "+SelectedValue+" = "+reponse);
     return reponse
 }
-function LancementDoublePersonnages(){
-    $("#boutonDouble").remove();
-    ChoixPersonnage2();
-    console.log("Personnage caché 1 :"+persoCache1);
-    console.log("Personnage caché 2 :"+persoCache2);
-    ModeDouble=true;
-}  
+
+
+
+function LancementFacile(){
+    ModeFacile = true;
+    document.getElementById("MODE FACILE").className = "disabled";
+    document.getElementById("MODE FACILE").onclick = "";
+    nbEssais += 2;
+    $("#NbEssai").empty();
+    document.getElementById("NbEssai").append("Nombre de tentatives restantes: "+nbEssais);
+    console.log("Activation mode facile");
+    $("#ZoneQuestion").append('<input type="button" id="estimer" value="ESTIMER" onclick="Estimation()">');
+} 
+
+
+
+
+//Renvoi un tableau contenant tout les éléments pour lequel la valeur est fausse
+function TabFaux(){
+    console.log("Lancement TabFaux");
+    console.log("Mode Facile activé");
+    let tab = []; 
+    let max_questions = 10;
+    let nbQuestions = 0;
+    for(let i=0;i<max_questions;i++){
+        if (document.getElementById("attr"+i) != null){
+            nbQuestions += 1;
+        } 
+    }
+    console.log("nbQuesions: "+nbQuestions);
+    let reponseBonIndex = traitement(nbQuestions,indexBonneReponse);
+    console.log("reponseBonIndex: "+reponseBonIndex);
+    for(let index in jsonObject.personnages){
+        console.log(jsonObject.personnages[index].nom+": "+traitement(nbQuestions,index));
+        if(traitement(nbQuestions,index) == !(reponseBonIndex)){
+            if(!(tab.includes(index))){
+                tab.push(index);
+            }    
+        } 
+    } 
+    console.log(tab);
+    return tab;
+} 
+
+
+
+//Fonction qui retoruner automatiquement les images dans le mode facile
+function RetournementAutomatique(){
+    if(ModeFacile){ 
+        let tabFaux = TabFaux();
+        for(let value of tabFaux){
+            if(jsonObject.personnages[value].image != 'https://raw.githubusercontent.com/eric-gilles/Projet_Prog/main/images/back.jpg'){
+                changeImage(value,jsonObject.personnages[value].image,'https://raw.githubusercontent.com/eric-gilles/Projet_Prog/main/images/back.jpg');
+            } 
+        } 
+    } 
+} 
+
+
+//Fonction qui indique à l'avance le nombre de case qui seront retournés dans le mode facile
+function Estimation(){
+    if(ModeFacile){
+        let tabFaux = TabFaux();
+        let compteur = 0;
+        for(let value of tabFaux){
+            if(jsonObject.personnages[value].image != 'https://raw.githubusercontent.com/eric-gilles/Projet_Prog/main/images/back.jpg'){
+                compteur += 1;
+            } 
+        } 
+        if ($("#NbRetire") != null){
+            $("#NbRetire").remove();
+        } 
+        $("#ZoneQuestion").append("<p id='NbRetire'> Cette questions retirera "+compteur+" éléments</p>");
+    } 
+} 

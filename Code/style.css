@@ -29,18 +29,40 @@ h1{
     width: auto;
     background: linear-gradient(rgb(250, 253, 60), #fceb00);
 }
+table{
+    table-layout: fixed;
+    height: 100%;
+    width: 100%;
+}
+tr{
+    width: 100%;
+} 
+td{
+    max-height: 100%;
+    max-width: 20%;
+} 
+
 .avatar{
     border-style:solid;
     border-color:rgb(255, 51, 0);
-    height: 100%;
+    height: auto;
     width: 100%;
+    top:0;
+    margin-top:0;
+    padding-top:0;
     border-width: 4px;
-    object-fit: cover;
+    border-image-width: auto;
 }
+.persoTentative{
+    border-style:hidden;
+    height: auto;
+    text-align: center;
+    width: 60%;
+} 
 .rotated{
     border-style:solid;
     border-color:rgb(255, 51, 0);
-    height: 100%;
+    height: auto;
     width: 100%;
     animation: rotate;
     border-width: 4px;
@@ -61,7 +83,6 @@ h1{
 }
 body {
     font-family: 'ABeeZee';
-    overflow-x: hidden;
 }
 
 /*css bouton*/
@@ -71,7 +92,7 @@ input{
     transition: all 500ms ease-out;
 }
 input:hover{
-    background-color: rgb(189, 189, 189); 
+    background-color: rgb(0, 0, 0); 
 }
 .caseTableau{
     padding: 10px;
@@ -84,22 +105,33 @@ input:hover{
     bottom: 0;
     margin-bottom: 0;
     padding-bottom: 0;
+    font-size:auto;
 }
-img:not(.logo) {
+
+img:not(.logo,.persoTentative) {
     max-height: 100%;
     width: 100%;
 }
 input[type=button] {
-    transition-duration: 0.5s;
-    border: 2px solid #b83333;
+    transition-duration: 0.4s;
+    border: 2px solid #f7bd01;
     border-radius: 5px;
     font-size: 100%;  
     background-color: #ffffff;
   }
   
-input[type=button]:hover {
-    background-color: #8deb75;
-    color: rgb(0, 0, 0);
+input[type=button]:hover:not(.disabled) {
+    background-color: #f7bd01;
+}
+#valider,#estimer{
+    max-height: 60px;
+} 
+.disabled {
+    opacity: 0.6;
+    background-color: #f7bd01;
+    cursor: not-allowed;
   }
+
+
 
 td:hover {background-color: rgba(255, 124, 2, 0.281);}

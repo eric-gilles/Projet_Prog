@@ -34,8 +34,6 @@ function Affichage(json){
     }  
 }
 
-
-
 function changeImage(idImg,oldImageLink,newImageLink){
     document.getElementById(idImg).setAttribute("class","rotated");
     setTimeout(function(){
