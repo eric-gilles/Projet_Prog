@@ -1,0 +1,8 @@
+{
+    "personnages": [
+        { "nom": "Jeanne", "image": "Jeanne.jpeg", "attributs": { "a/ont des cheveux": ["blonds"], "a/ont des yeux": ["marrons"], "a/ont peau": ["blanche"], "est/sont de sexe": ["féminin"], "est/sont": ["agé"] } },
+        { "nom": "Margot", "image": "Margot.jpeg", "attributs": { "a/ont des cheveux": ["rose", "bleu"], "a/ont des yeux": ["noirs"], "a/ont la peau": ["blanche"], "est/sont de sexe": ["féminin"], "est/sont": ["jeune"] } },
+        { "nom": "Robert", "image": "Robert.jpeg", "attributs": { "a/ont des cheveux": ["blancs"], "a/ont des yeux": ["marrons"], "a/ont la peau": ["noir"], "est/sont de sexe": ["masculin"], "est/sont": ["agé", "chauve"] } },
+        { "nom": "George", "image": "George.jpeg", "attributs": { "a/ont des cheveux": ["blonds"], "a/ont des yeux": ["verts", "bleus"], "a/ont la peau": ["blanche"], "est/sont de sexe": ["masculin"], "est/sont": ["un enfant"] } }
+    ]
+}
