@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <title>Qui est-ce?</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="AffichagePerso.js"></script>
+    <script src="Fonction.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/png" href="Logo-QuiEstce.png"/>
+</head>
+
+<body>
+    <div id="main">
+        <div class="HautDePage">
+            <div class="row">
+                <div class="col-12 col-md-9">
+                    <div class="cadre">
+                        <div class="grille" id="Personnages">
+                            <!--Affichage des images ici-->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-3">
+                    <div class="proposition">
+                        <div class="row">
+                            <div class="col-3 col-md-12">
+                                <img src="Logo-QuiEstce.png" alt="Qui Est-ce?" class="logo" onclick="location.reload()" title="Recharger la page">
+                            </div>
+                            <div class="col-6 col-md-12"><br/>    
+                                Je pense qu'il s'agit de : <br/>
+                                <select id="essai" onchange="AfficherPersoEssais()">
+                                    <!-- les options avec les balises <option></option>-->
+                                </select><br/><br/>
+                                <img src='' id='ImagePersoTentative' class="persoTentative"><br/><br/>
+                                <input onclick="TestPerso()" type="button" value="Valider">
+                            </div>
+                            <div class="col-3 col-md-12">
+                                <div class="facile"></br></br></br>
+                                    <input class="disabled" onclick="" type="button" value="MODE FACILE" id="MODE FACILE" title="Dans ce mode, le nombre d'essais est porté à 5. Vous disposez d'un bouton supplémentaire permettant d'estimer la puissance d'une question. Enfin, la validation d'une question entrainera le retournement automatique des personnages éliminés."></br></br>
+                                    <input class="disabled" id="boutonDouble" onclick="" type="button" value="MODE DOUBLE PERSONNAGE" title="Un défi supplémentaire pour les joueurs expérimentés ! Ici, c'est deux personnages qu'il vous faut trouver."></br>
+                                    <p id="NbEssai">Nombre de tentatives restantes: 3</p></br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> </br>
+        <div class="container-fluid">
+            <div id="ZoneQuestion" class="row">
+                <div id="Questions">
+                    <div id="question0">
+                        Est-ce que ce/ces personnages
+                        <select id="attr0"  onchange="selectVal(0)">
+                            <!-- les options -->
+                        </select>
+                        <select id="valeur0">
+                            <!-- les options -->
+                        </select>
+                         ?
+                    </div>
+                </div>
+                <input type="button" id="valider" value="VALIDER">  
+                <div id="reponse" class="reponse"></div>
+            </div>
+            <input type="button" value="Ajout Question" id="addquestion">
+        </div>
+    </div><hr>
+    <input type="file" id="file" value="Import"/><br/>
+    <button id="import">Importer</button>
+    <p id="result"></p>
+    <script>
+        document.getElementById('import').onclick = function() {
+            var files = document.getElementById('file').files;
+            if (files.length <= 0) {
+                return false;
+            }
+            var fr = new FileReader();
+            fr.onload = function(e) {
+                var parsed = JSON.parse(e.target.result);
+                Affichage(parsed);
+                ChoixPersonnage(parsed);
+                GenerationChoix(parsed);
+                InitialisationQuestion(parsed);
+            }
+            fr.readAsText(files.item(0));
+            document.getElementById('file').remove();
+            document.getElementById('import').remove();
+            document.getElementById('MODE FACILE').className = "";
+            document.getElementById('boutonDouble').className = "";
+            document.getElementById('MODE FACILE').setAttribute("onclick","LancementFacile()");
+            document.getElementById('boutonDouble').setAttribute("onclick","ConstruitQuestionModeDouble(),LancementDoublePersonnages()");
+        };
+    </script>
+</body>
+</html>

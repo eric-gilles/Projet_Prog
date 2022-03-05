@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=QuiEstCe Lanceur
+Comment=Lanceur de jeu
+Exec=firefox ./root/QuiEstCe.html
+Icon=/home/e20200007056/Bureau/ProjetProg_R.Gallerne-E.Gilles-L.Savy-M.Navel/root/Logo-QuiEstce.png
+Terminal=false
+StartupNotify=false
