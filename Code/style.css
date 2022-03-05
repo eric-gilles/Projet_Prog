@@ -112,7 +112,7 @@ input:hover{
     bottom: 0;
     margin-bottom: 0;
     padding-bottom: 0;
-    font-size:auto;
+    font-size:medium;
 }
 
 img:not(.logo,.persoTentative) {

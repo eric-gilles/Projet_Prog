@@ -304,9 +304,9 @@ function TraitementUneQuestion(SelectedAttributs,SelectedValue,indexVerif){
 
 function LancementFacile(){
     ModeFacile = true;
-    document.getElementById("MODE FACILE").className = "disabled";
+    document.getElementById("MODE_FACILE").className = "disabled";
     document.getElementById("boutonDouble").className = "disabled";
-    document.getElementById("MODE FACILE").onclick = "";
+    document.getElementById("MODE_FACILE").onclick = "";
     document.getElementById("boutonDouble").onclick = "";
     nbEssais += 2;
     $("#NbEssai").empty();
@@ -431,8 +431,8 @@ function TraitementUneQuestionModeDouble(SelectedPredicat,SelectedAttributs,Sele
 
 //active le mode double personnage (qui désactive le mode facile)
 function LancementDoublePersonnages(){
-    document.getElementById("MODE FACILE").className = "disabled";
-    document.getElementById("MODE FACILE").onclick = "";
+    document.getElementById("MODE_FACILE").className = "disabled";
+    document.getElementById("MODE_FACILE").onclick = "";
     document.getElementById("boutonDouble").className = "disabled";
     document.getElementById("boutonDouble").onclick = "";
     ChoixPersonnage2();
