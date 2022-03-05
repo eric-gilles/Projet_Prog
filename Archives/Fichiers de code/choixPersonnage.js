@@ -14,7 +14,7 @@ function ChoixPersonnage(json){
 //Test
 const nbEssaisNormal = 3;
 var nbEssais = nbEssaisNormal;
-function TestPerso(var index){
+function TestPerso(index){
     $.getJSON("http://localhost:8888/test.json", function(data){
         let html = "<option>...</option>";
         for(let d of data.personnages){

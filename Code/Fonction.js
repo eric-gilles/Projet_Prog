@@ -6,6 +6,7 @@ function randomInt(max) {
 
 
 var ModeDouble=false;
+var ModeFacile=false;
 var persoCache1 = 0;
 var persoCache2 = 0;
 var jsonObject;
@@ -22,9 +23,7 @@ var personnage2trouve=false;
 //Choix du personnage caché, son index sera placé dans "persoCache1"
 //Cette fonction ajoute aussi un variable "jsonObject" qui contient l'objet json parsé
 function ChoixPersonnage(json){
-    for ( p of json.personnages){  
-        nbrePerso+=1;   
-    }   
+    nbrePerso=json.personnages.length;    
     persoCache1 = randomInt(nbrePerso); 
     jsonObject = json;
     console.log("La bonne réponse est :"+persoCache1);
@@ -36,7 +35,7 @@ function ChoixPersonnage2(){
     do{
         persoCache2=randomInt(nbrePerso);
     }
-    while(persoCache1==persoCache2)  
+    while(persoCache1==persoCache2); 
 } 
 
 
@@ -81,7 +80,7 @@ function TestPerso(){
     if(!ModeDouble){
         if ((select.selectedIndex-1 == persoCache1)&&(nbEssais>0)){
             alert("Bravo ! Vous avez gagnez !");
-            location.reload()
+            location.reload();
         }else if (nbEssais==0){
             if (confirm("Fin du Jeu ! Perdu ! La bonne réponse était: "+jsonObject.personnages[persoCache1].nom)){
                 nbEssais = nbEssaisNormal;
@@ -105,7 +104,7 @@ function TestPerso(){
 
             if(personnage1trouve && personnage2trouve){
                 alert("Fin du jeu ! vous avez trouvé les deux personnages ! Bravo !");
-                location.reload()
+                location.reload();
             }else{
                 if(personnage1trouve || personnage2trouve){
                     alert("Vous avez trouvé un des personnages ! Bravo plus que 1 !");
@@ -177,7 +176,7 @@ function InitialisationQuestion(){
                 else{ 
                     $("#valider").attr("onclick","traitementAffichage("+x+","+persoCache1+"),RetournementAutomatique()");
                 } 
-            } else alert('Vous avez assez de questions là! Ca va oui non mais Oh! Vous vous croyez où ?')
+            } else alert('Vous avez assez de questions là! Ca va oui non mais Oh! Vous vous croyez où ?');
         });
     
         $(div).on("click", ".delete", function(e) {
@@ -218,22 +217,21 @@ function selectVal(i){
     var value=[]; 
     var html="";
     var cptValeur=0;
-    var Selected;
     $("#valeur"+i+">option").remove();
-    SelectedIndex = document.getElementById('attr'+i).selectedIndex;
-    Selected=document.getElementById('attr'+i).options[SelectedIndex].value;
+    var SelectedIndex = document.getElementById('attr'+i).selectedIndex;
+    var Selected=document.getElementById('attr'+i).options[SelectedIndex].value;
     for(let p of jsonObject.personnages){
         for(let a in p.attributs){
             if(Selected==a){ //si l'attribut selectionné correspond alors...   
                 if(value.length==0){ //si le tableau est vide alors je rentre la valeur
-                    for(valeur of p.attributs[a]){        
+                    for(let valeur of p.attributs[a]){        
                         value.push(valeur);
                         html+="<option id='value"+i+"."+cptValeur+"'>"+valeur+"</option>";
                         cptValeur++;
                     }
                 } 
                 else{
-                    for(valeur of p.attributs[a]){
+                    for(let valeur of p.attributs[a]){
                         if(!value.includes(valeur)){ 
                             value.push(valeur);
                             html+="<option id='value"+i+"."+cptValeur+"'>"+valeur+"</option>";
@@ -261,7 +259,7 @@ function traitementAffichage(nbQuestions,indexVerif){
     else{
         $("#reponse").append("<p class='reponseOuiNon'>Non</p>");
     } 
-    return reponse
+    return reponse;
 } 
 
 
@@ -270,8 +268,8 @@ function traitementAffichage(nbQuestions,indexVerif){
 
 //Logique des questions : rend une valeur booléenne
 function traitement(nbQuestions,indexVerif){
-    SelectedAttributs=$("#attr0").val();
-    SelectedValue=$("#valeur0").val();
+    var SelectedAttributs=$("#attr0").val();
+    var SelectedValue=$("#valeur0").val();
     let reponse = TraitementUneQuestion(SelectedAttributs,SelectedValue,indexVerif);       
     if(nbQuestions > 1){ //pour plusieurs questions
         for(let i=1;i<nbQuestions;i++){
@@ -295,11 +293,11 @@ function traitement(nbQuestions,indexVerif){
 
 //Permet de traiter la valeur booléenne d'une unique question
 function TraitementUneQuestion(SelectedAttributs,SelectedValue,indexVerif){
-    reponse = false;
+    let reponse = false;
     for(let value of jsonObject.personnages[indexVerif].attributs[SelectedAttributs]){
         reponse=(reponse ||  (value==SelectedValue));
     }
-    return reponse
+    return reponse;
 }
 
 
@@ -334,7 +332,7 @@ function TabFaux(){
     console.log("reponseBonIndex: "+reponseBonIndex);
     for(let index in jsonObject.personnages){
         console.log(jsonObject.personnages[index].nom+": "+traitement(nbQuestions,index));
-        if(traitement(nbQuestions,index) == !(reponseBonIndex)){
+        if(traitement(nbQuestions,index) != (reponseBonIndex)){
             if(!(tab.includes(index))){
                 tab.push(index);
             }    
