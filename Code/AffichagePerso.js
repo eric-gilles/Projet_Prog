@@ -5,13 +5,10 @@ function Affichage(json){
     if (json != null){
         $("#Personnages").empty();
         console.log("debut decompression fichier JSON");
-            console.log(json);
             let html = "<table>";
             html += "<tr>";
             let idImg = 0;
-            console.log("1");
             for(let d of json.personnages){
-                console.log("2");
                 if(nbElement > 4){
                     html += "</tr>";
                     html += "<tr>";
@@ -25,7 +22,6 @@ function Affichage(json){
                 html += `</p></td>`;
                 idImg += 1;
             }
-            console.log("3");
             html += "</table>";
             $("#Personnages").append(html);
     } 
@@ -42,6 +38,6 @@ function changeImage(idImg,oldImageLink,newImageLink){
         document.getElementById(idImg).setAttribute("onclick","changeImage('"+idImg+"','"+newImageLink+"','"+oldImageLink+"')");
         setTimeout(function(){
             document.getElementById(idImg).setAttribute("class","avatar");
-        }, 1000); 
-    }, 1000);
+        }, 800); 
+    }, 800);
 }

@@ -7,10 +7,10 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="http://localhost:8888/fichier/AffichagePerso.js"></script>
-    <script src="http://localhost:8888/fichier/Fonction.js"></script>
+    <script src="AffichagePerso.js"></script>
+    <script src="Fonction.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee">
-    <link rel="stylesheet" href="http://localhost:8888/fichier/style.css">
+    <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 
@@ -29,7 +29,7 @@
                     <div class="proposition">
                         <div class="row">
                             <div class="col-3 col-md-12">
-                                <img src="http://localhost:8888/fichier/Logo-QuiEstce.png" alt="Qui Est-ce?" class="logo">
+                                <img src="Logo-QuiEstce.png" alt="Qui Est-ce?" class="logo" onclick="location.reload()" title="Recharger la page">
                             </div>
                             <div class="col-6 col-md-12"><br/>    
                                 Je pense qu'il s'agit de : <br/>
@@ -41,7 +41,8 @@
                             </div>
                             <div class="col-3 col-md-12">
                                 <div class="facile"></br></br></br>
-                                    <input onclick="LancementFacile()" type="button" value="MODE FACILE" id="MODE FACILE">
+                                    <input class="disabled" onclick="" type="button" value="MODE FACILE" id="MODE FACILE" title="Dans ce mode, le nombre d'essais est porté à 5. Vous disposez d'un bouton supplémentaire permettant d'estimer la puissance d'une question. Enfin, la validation d'une question entrainera le retournement automatique des personnages éliminés."></br></br>
+                                    <input class="disabled" id="boutonDouble" onclick="" type="button" value="MODE DOUBLE PERSONNAGE" title="Un défi supplémentaire pour les joueurs expérimentés ! Ici, c'est deux personnages qu'il vous faut trouver."></br>
                                     <p id="NbEssai">Nombre de tentatives restantes: 3</p></br>
                                 </div>
                             </div>
@@ -54,22 +55,22 @@
             <div id="ZoneQuestion" class="row">
                 <div id="Questions">
                     <div id="question0">
-                        Est-ce que
+                        Est-ce que ce/ces personnages
                         <select id="attr0"  onchange="selectVal(0)">
                             <!-- les options -->
                         </select>
                         <select id="valeur0">
                             <!-- les options -->
                         </select>
-                        ?
+                         ?
                     </div>
                 </div>
-                <input type="button" id="valider" value="VALIDER">     
+                <input type="button" id="valider" value="VALIDER">  
+                <div id="reponse" class="reponse"></div>
             </div>
             <input type="button" value="Ajout Question" id="addquestion">
         </div>
-        <div id="reponse"></div>
-    </div>
+    </div><hr>
     <input type="file" id="file" value="Import"/><br/>
     <button id="import">Importer</button>
     <p id="result"></p>
@@ -90,6 +91,10 @@
             fr.readAsText(files.item(0));
             document.getElementById('file').remove();
             document.getElementById('import').remove();
+            document.getElementById('MODE FACILE').className = "";
+            document.getElementById('boutonDouble').className = "";
+            document.getElementById('MODE FACILE').setAttribute("onclick","LancementFacile()");
+            document.getElementById('boutonDouble').setAttribute("onclick","ConstruitQuestionModeDouble(),LancementDoublePersonnages()");
         };
     </script>
 </body>
