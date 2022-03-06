@@ -38,6 +38,6 @@ function changeImage(idImg,oldImageLink,newImageLink){
         document.getElementById(idImg).setAttribute("onclick","changeImage('"+idImg+"','"+newImageLink+"','"+oldImageLink+"')");
         setTimeout(function(){
             document.getElementById(idImg).setAttribute("class","avatar");
-        }, 800); 
-    }, 800);
+        }, 630); 
+    }, 630);
 }

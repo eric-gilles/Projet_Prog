@@ -73,7 +73,7 @@ td{
     border-width: 4px;
     object-fit: cover;
     transition: all 800ms ease-out;
-    transform: rotate3d(0,1,0,89deg);
+    transform: rotate3d(0,1,0,89.8deg);
 }
 /*.rotated:hover {
     transform: rotate3d(0,1,0,89deg);
