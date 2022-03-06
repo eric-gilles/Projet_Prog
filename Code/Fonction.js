@@ -99,9 +99,11 @@ function TestPerso(){
         if ((nbEssais>0)){
             if((select.selectedIndex-1) == persoCache1){
                 personnage1trouve=true;
+                alert("Vous avez trouvé un des personnages ! Bravo plus que 1 !");
             }
-            if((select.selectedIndex-1) == persoCache2){
+            else if((select.selectedIndex-1) == persoCache2){
                 personnage2trouve=true;
+                alert("Vous avez trouvé un des personnages ! Bravo plus que 1 !");
             }
             // console.log(personnage2trouve && personnage1trouve);
 
@@ -111,9 +113,8 @@ function TestPerso(){
                 location.reload();
             }else{
                 if(personnage1trouve==true || personnage2trouve==true){
-                    alert("Vous avez trouvé un des personnages ! Bravo plus que 1 !");
                     nbEssais--;
-                } 
+                }else nbEssais--;
             }
               
             
@@ -479,6 +480,7 @@ $(document).ready(function() {
             nbEssais = parseInt(localStorage.getItem("essais"));  
             jsonObject = JSON.parse(localStorage._json);
             if(ModeDouble==true){
+                let essais = nbEssais;
                 persoCache2 = parseInt(localStorage.getItem("perso2"));
                 personnage2trouve = localStorage.getItem("perso2trouve") === "true";
                 InitialisationQuestion();
@@ -486,6 +488,8 @@ $(document).ready(function() {
                 let html="<div>Est-ce que <select id='Predicat0'><option>...</option><option>au moins un des personnages</option><option>les deux personnages</option><option>aucun des personnages</option></select><select id='attr0' onchange='selectVal(0)'><option>...</option></select><select id='valeur0'></div>";
                 $("#Questions").append(html);
                 LancementDoublePersonnages();
+                $("#NbEssai").empty();
+                $("#NbEssai").append("Nombre de tentatives restantes: "+essais);
             }else{
                 InitialisationQuestion();
                 $('#MODE_FACILE').removeClass("disabled");
@@ -496,6 +500,9 @@ $(document).ready(function() {
             if(ModeFacile==true){
                 LancementFacile();
                 $("#valider").attr("onclick","traitementAffichage(1,"+persoCache1+"),RetournementAutomatique()");
+                nbEssais -= 2;
+                $("#NbEssai").empty();
+                $("#NbEssai").append("Nombre de tentatives restantes: "+nbEssais);
             }
             document.getElementById('file').remove();
             document.getElementById('import').remove();
