@@ -90,6 +90,7 @@ td{
 body {
     font-family: 'ABeeZee';
     background: #f81212;
+    overflow-x: hidden;
 }
 
 /*css bouton*/

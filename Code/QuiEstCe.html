@@ -37,7 +37,7 @@
                                     <!-- les options avec les balises <option></option>-->
                                 </select><br/><br/>
                                 <img src='' id='ImagePersoTentative' class="persoTentative"><br/><br/>
-                                <input onclick="TestPerso()" type="button" value="Valider">
+                                <input class="disabled" onclick="" type="button" id="test" value="Valider">
                             </div>
                             <div class="col-3 col-md-12">
                                 <div class="facile"><br><br><br>
@@ -71,8 +71,8 @@
             <input type="button" value="Ajout Question" id="addquestion">
         </div>
     </div><hr>
-    <input type="file" id="file"/><br/>
-    <button id="import">Importer</button>
+    <input type="file" id="file" title="Choisir un fichier json."/><br/>
+    <button id="import" title="Importer le fichier json choisi précédemment.">Importer</button>
     <p id="result"></p>
     <script>
         document.getElementById('import').onclick = function() {
@@ -83,16 +83,26 @@
             var fr = new FileReader();
             fr.onload = function(e) {
                 var parsed = JSON.parse(e.target.result);
+                localStorage._json = e.target.result;
                 Affichage(parsed);
                 ChoixPersonnage(parsed);
                 GenerationChoix(parsed);
-                InitialisationQuestion(parsed);
+                InitialisationQuestion();
+                var x = document.createElement("INPUT");
+                x.setAttribute("type", "button");
+                x.setAttribute("value", "Sauvegarder Partie");
+                x.setAttribute("id", "save");
+                x.setAttribute("onclick", "save()");
+                x.setAttribute("title", "Permet de sauvegarder sa partie en cours.");
+                document.getElementsByClassName("proposition")[0].appendChild(x);
             };
             fr.readAsText(files.item(0));
             document.getElementById('file').remove();
             document.getElementById('import').remove();
+            document.getElementById('test').className = "";
             document.getElementById('MODE_FACILE').className = "";
             document.getElementById('boutonDouble').className = "";
+            document.getElementById('test').setAttribute("onclick","TestPerso()");
             document.getElementById('MODE_FACILE').setAttribute("onclick","LancementFacile()");
             document.getElementById('boutonDouble').setAttribute("onclick","ConstruitQuestionModeDouble(),LancementDoublePersonnages()");
         };

@@ -77,17 +77,20 @@ function AfficherPersoEssais(){
 //Test si le personnage proposé à l'essai est la bonne réponse et déduit le nombre d'essais restants
 function TestPerso(){
     var select = document.getElementById('essai');
-    if(!ModeDouble){
+    if(ModeDouble==false){
         if ((select.selectedIndex-1 == persoCache1)&&(nbEssais>0)){
             alert("Bravo ! Vous avez gagnez !");
+            localStorage.clear();
             location.reload();
-        }else if (nbEssais==0){
-            if (confirm("Fin du Jeu ! Perdu ! La bonne réponse était: "+jsonObject.personnages[persoCache1].nom)){
+        }else if (nbEssais==1){
+            if (confirm("Fin du Jeu ! Perdu ! La bonne réponse était: "+jsonObject.personnages[persoCache1].nom+"\nReset ?")){
                 nbEssais = nbEssaisNormal;
             }
         }
         else{
-            nbEssais--;
+            if (select.selectedIndex!=0) {   
+                nbEssais--;
+            }
         }
         $("#NbEssai").empty();
         document.getElementById("NbEssai").append("Nombre de tentatives restantes: "+nbEssais);
@@ -102,11 +105,12 @@ function TestPerso(){
             }
             // console.log(personnage2trouve && personnage1trouve);
 
-            if(personnage1trouve && personnage2trouve){
+            if(personnage1trouve==true && personnage2trouve==true){
                 alert("Fin du jeu ! vous avez trouvé les deux personnages ! Bravo !");
+                localStorage.clear();
                 location.reload();
             }else{
-                if(personnage1trouve || personnage2trouve){
+                if(personnage1trouve==true || personnage2trouve==true){
                     alert("Vous avez trouvé un des personnages ! Bravo plus que 1 !");
                     nbEssais--;
                 } 
@@ -199,7 +203,7 @@ function InitialisationQuestion(){
 function ConstruitQuestionModeDouble(){
     $("#Questions").empty();
     let html="<div>Est-ce que <select id='Predicat0'><option>...</option><option>au moins un des personnages</option><option>les deux personnages</option><option>aucun des personnages</option></select><select id='attr0' onchange='selectVal(0)'><option>...</option></select><select id='valeur0'></div>";
-    $("#Questions").append(html);    
+    $("#Questions").append(html);
     for(let a in jsonObject.personnages[0].attributs){
         html="";
         html+="<option id='"+a+"'>"+a+"</option>";    
@@ -446,3 +450,68 @@ function LancementDoublePersonnages(){
 
     
 }
+
+function save(){
+    localStorage.setItem("encours", true);
+    localStorage.setItem("modeD", ModeDouble);
+    localStorage.setItem("modeF", ModeFacile);
+    localStorage.setItem("essais", nbEssais);
+    localStorage.setItem("perso1", persoCache1);
+    localStorage.setItem("perso1trouve", personnage1trouve);
+    if(ModeDouble){
+        localStorage.setItem("perso2", persoCache2);
+        localStorage.setItem("perso2trouve", personnage2trouve);
+    }
+    console.log(localStorage);
+}
+
+$(document).ready(function() {
+    if (localStorage.getItem("encours")){
+        if (confirm("Charger Partie en cours ?")==true){
+            console.log(localStorage);
+            console.log(JSON.parse(localStorage._json));
+            Affichage(JSON.parse(localStorage._json));
+            GenerationChoix(JSON.parse(localStorage._json));
+            ModeDouble = localStorage.getItem("modeD") === "true";
+            ModeFacile = localStorage.getItem("modeF") === "true";    
+            persoCache1 = parseInt(localStorage.getItem("perso1"));  
+            personnage1trouve = localStorage.getItem("perso1trouve") === "true";  
+            nbEssais = parseInt(localStorage.getItem("essais"));  
+            jsonObject = JSON.parse(localStorage._json);
+            if(ModeDouble==true){
+                persoCache2 = parseInt(localStorage.getItem("perso2"));
+                personnage2trouve = localStorage.getItem("perso2trouve") === "true";
+                InitialisationQuestion();
+                $("#Questions").empty();
+                let html="<div>Est-ce que <select id='Predicat0'><option>...</option><option>au moins un des personnages</option><option>les deux personnages</option><option>aucun des personnages</option></select><select id='attr0' onchange='selectVal(0)'><option>...</option></select><select id='valeur0'></div>";
+                $("#Questions").append(html);
+                LancementDoublePersonnages();
+            }else{
+                InitialisationQuestion();
+                $('#MODE_FACILE').removeClass("disabled");
+                $('#MODE_FACILE').attr("onclick","LancementFacile()");
+                $("#NbEssai").empty();
+                $("#NbEssai").append("Nombre de tentatives restantes: "+nbEssais);
+            }
+            if(ModeFacile==true){
+                LancementFacile();
+                $("#valider").attr("onclick","traitementAffichage(1,"+persoCache1+"),RetournementAutomatique()");
+            }
+            document.getElementById('file').remove();
+            document.getElementById('import').remove();
+            var x = document.createElement("INPUT");
+            x.setAttribute("type", "button");
+            x.setAttribute("value", "Sauvegarder Partie");
+            x.setAttribute("id", "save");
+            x.setAttribute("onclick", "save()");
+            x.setAttribute("title", "Permet de sauvegarder sa partie en cours.");
+            $(".proposition")[0].appendChild(x);
+            $('#test').removeClass("disabled");
+            $('#test').attr("onclick","TestPerso()");
+            $("#valider").attr("onclick","traitementAffichage(1,"+persoCache1+"),RetournementAutomatique()");
+            
+        }else{
+            localStorage.clear();
+        }
+    }
+});
