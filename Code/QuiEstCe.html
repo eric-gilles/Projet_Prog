@@ -85,7 +85,6 @@
                 var parsed = JSON.parse(e.target.result);
                 localStorage._json = e.target.result;
                 localStorage._nbPerso = parsed.personnages.length;
-                console.log(localStorage);
                 Affichage(parsed);
                 ChoixPersonnage(parsed);
                 GenerationChoix(parsed);

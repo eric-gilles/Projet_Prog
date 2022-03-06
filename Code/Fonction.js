@@ -477,17 +477,12 @@ function save(){
 $(document).ready(function() {
     if (localStorage.getItem("encours")){
         if (confirm("Charger Partie en cours ?")==true){
-            console.log(localStorage);
-            console.log(JSON.parse(localStorage._json));
             nbrePerso = localStorage._nbPerso;
             Affichage(JSON.parse(localStorage._json));
             let cartes = localStorage.getItem("cartes");
             let tab = cartes.split(',');
-            console.log(cartes);
             for (let i = 0; i < localStorage._nbPerso; i++) {
-                console.log("for images")
                 if (tab[i]=="true") {
-                    console.log("if images")
                     changeImage(i, $("#"+i).attr('src'), "https://raw.githubusercontent.com/eric-gilles/Projet_Prog/main/images/back.jpg"); 
                 }
             }
