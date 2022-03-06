@@ -6,6 +6,7 @@ function randomInt(max) {
 
 
 var ModeDouble=false;
+var ModeFacile=false;
 var persoCache1 = 0;
 var persoCache2 = 0;
 var jsonObject;
@@ -22,9 +23,7 @@ var personnage2trouve=false;
 //Choix du personnage caché, son index sera placé dans "persoCache1"
 //Cette fonction ajoute aussi un variable "jsonObject" qui contient l'objet json parsé
 function ChoixPersonnage(json){
-    for ( p of json.personnages){  
-        nbrePerso+=1;   
-    }   
+    nbrePerso=json.personnages.length;    
     persoCache1 = randomInt(nbrePerso); 
     jsonObject = json;
     console.log("La bonne réponse est :"+persoCache1);
@@ -36,7 +35,7 @@ function ChoixPersonnage2(){
     do{
         persoCache2=randomInt(nbrePerso);
     }
-    while(persoCache1==persoCache2)  
+    while(persoCache1==persoCache2); 
 } 
 
 
@@ -78,17 +77,20 @@ function AfficherPersoEssais(){
 //Test si le personnage proposé à l'essai est la bonne réponse et déduit le nombre d'essais restants
 function TestPerso(){
     var select = document.getElementById('essai');
-    if(!ModeDouble){
+    if(ModeDouble==false){
         if ((select.selectedIndex-1 == persoCache1)&&(nbEssais>0)){
             alert("Bravo ! Vous avez gagnez !");
-            location.reload()
-        }else if (nbEssais==0){
-            if (confirm("Fin du Jeu ! Perdu ! La bonne réponse était: "+jsonObject.personnages[persoCache1].nom)){
+            localStorage.clear();
+            location.reload();
+        }else if (nbEssais==1){
+            if (confirm("Fin du Jeu ! Perdu ! La bonne réponse était: "+jsonObject.personnages[persoCache1].nom+"\nReset ?")){
                 nbEssais = nbEssaisNormal;
             }
         }
         else{
-            nbEssais--;
+            if (select.selectedIndex!=0) {   
+                nbEssais--;
+            }
         }
         $("#NbEssai").empty();
         document.getElementById("NbEssai").append("Nombre de tentatives restantes: "+nbEssais);
@@ -97,20 +99,22 @@ function TestPerso(){
         if ((nbEssais>0)){
             if((select.selectedIndex-1) == persoCache1){
                 personnage1trouve=true;
+                alert("Vous avez trouvé un des personnages ! Bravo plus que 1 !");
             }
-            if((select.selectedIndex-1) == persoCache2){
+            else if((select.selectedIndex-1) == persoCache2){
                 personnage2trouve=true;
+                alert("Vous avez trouvé un des personnages ! Bravo plus que 1 !");
             }
             // console.log(personnage2trouve && personnage1trouve);
 
-            if(personnage1trouve && personnage2trouve){
+            if(personnage1trouve==true && personnage2trouve==true){
                 alert("Fin du jeu ! vous avez trouvé les deux personnages ! Bravo !");
-                location.reload()
+                localStorage.clear();
+                location.reload();
             }else{
-                if(personnage1trouve || personnage2trouve){
-                    alert("Vous avez trouvé un des personnages ! Bravo plus que 1 !");
+                if(personnage1trouve==true || personnage2trouve==true){
                     nbEssais--;
-                } 
+                }else nbEssais--;
             }
               
             
@@ -177,7 +181,7 @@ function InitialisationQuestion(){
                 else{ 
                     $("#valider").attr("onclick","traitementAffichage("+x+","+persoCache1+"),RetournementAutomatique()");
                 } 
-            } else alert('Vous avez assez de questions là! Ca va oui non mais Oh! Vous vous croyez où ?')
+            } else alert('Vous avez assez de questions là! Ca va oui non mais Oh! Vous vous croyez où ?');
         });
     
         $(div).on("click", ".delete", function(e) {
@@ -200,7 +204,7 @@ function InitialisationQuestion(){
 function ConstruitQuestionModeDouble(){
     $("#Questions").empty();
     let html="<div>Est-ce que <select id='Predicat0'><option>...</option><option>au moins un des personnages</option><option>les deux personnages</option><option>aucun des personnages</option></select><select id='attr0' onchange='selectVal(0)'><option>...</option></select><select id='valeur0'></div>";
-    $("#Questions").append(html);    
+    $("#Questions").append(html);
     for(let a in jsonObject.personnages[0].attributs){
         html="";
         html+="<option id='"+a+"'>"+a+"</option>";    
@@ -218,22 +222,21 @@ function selectVal(i){
     var value=[]; 
     var html="";
     var cptValeur=0;
-    var Selected;
     $("#valeur"+i+">option").remove();
-    SelectedIndex = document.getElementById('attr'+i).selectedIndex;
-    Selected=document.getElementById('attr'+i).options[SelectedIndex].value;
+    var SelectedIndex = document.getElementById('attr'+i).selectedIndex;
+    var Selected=document.getElementById('attr'+i).options[SelectedIndex].value;
     for(let p of jsonObject.personnages){
         for(let a in p.attributs){
             if(Selected==a){ //si l'attribut selectionné correspond alors...   
                 if(value.length==0){ //si le tableau est vide alors je rentre la valeur
-                    for(valeur of p.attributs[a]){        
+                    for(let valeur of p.attributs[a]){        
                         value.push(valeur);
                         html+="<option id='value"+i+"."+cptValeur+"'>"+valeur+"</option>";
                         cptValeur++;
                     }
                 } 
                 else{
-                    for(valeur of p.attributs[a]){
+                    for(let valeur of p.attributs[a]){
                         if(!value.includes(valeur)){ 
                             value.push(valeur);
                             html+="<option id='value"+i+"."+cptValeur+"'>"+valeur+"</option>";
@@ -261,7 +264,7 @@ function traitementAffichage(nbQuestions,indexVerif){
     else{
         $("#reponse").append("<p class='reponseOuiNon'>Non</p>");
     } 
-    return reponse
+    return reponse;
 } 
 
 
@@ -270,8 +273,8 @@ function traitementAffichage(nbQuestions,indexVerif){
 
 //Logique des questions : rend une valeur booléenne
 function traitement(nbQuestions,indexVerif){
-    SelectedAttributs=$("#attr0").val();
-    SelectedValue=$("#valeur0").val();
+    var SelectedAttributs=$("#attr0").val();
+    var SelectedValue=$("#valeur0").val();
     let reponse = TraitementUneQuestion(SelectedAttributs,SelectedValue,indexVerif);       
     if(nbQuestions > 1){ //pour plusieurs questions
         for(let i=1;i<nbQuestions;i++){
@@ -295,20 +298,20 @@ function traitement(nbQuestions,indexVerif){
 
 //Permet de traiter la valeur booléenne d'une unique question
 function TraitementUneQuestion(SelectedAttributs,SelectedValue,indexVerif){
-    reponse = false;
+    let reponse = false;
     for(let value of jsonObject.personnages[indexVerif].attributs[SelectedAttributs]){
         reponse=(reponse ||  (value==SelectedValue));
     }
-    return reponse
+    return reponse;
 }
 
 
 
 function LancementFacile(){
     ModeFacile = true;
-    document.getElementById("MODE FACILE").className = "disabled";
+    document.getElementById("MODE_FACILE").className = "disabled";
     document.getElementById("boutonDouble").className = "disabled";
-    document.getElementById("MODE FACILE").onclick = "";
+    document.getElementById("MODE_FACILE").onclick = "";
     document.getElementById("boutonDouble").onclick = "";
     nbEssais += 2;
     $("#NbEssai").empty();
@@ -334,7 +337,7 @@ function TabFaux(){
     console.log("reponseBonIndex: "+reponseBonIndex);
     for(let index in jsonObject.personnages){
         console.log(jsonObject.personnages[index].nom+": "+traitement(nbQuestions,index));
-        if(traitement(nbQuestions,index) == !(reponseBonIndex)){
+        if(traitement(nbQuestions,index) != (reponseBonIndex)){
             if(!(tab.includes(index))){
                 tab.push(index);
             }    
@@ -433,8 +436,8 @@ function TraitementUneQuestionModeDouble(SelectedPredicat,SelectedAttributs,Sele
 
 //active le mode double personnage (qui désactive le mode facile)
 function LancementDoublePersonnages(){
-    document.getElementById("MODE FACILE").className = "disabled";
-    document.getElementById("MODE FACILE").onclick = "";
+    document.getElementById("MODE_FACILE").className = "disabled";
+    document.getElementById("MODE_FACILE").onclick = "";
     document.getElementById("boutonDouble").className = "disabled";
     document.getElementById("boutonDouble").onclick = "";
     ChoixPersonnage2();
@@ -448,3 +451,89 @@ function LancementDoublePersonnages(){
 
     
 }
+
+function save(){
+    localStorage.setItem("encours", true);
+    localStorage.setItem("modeD", ModeDouble);
+    localStorage.setItem("modeF", ModeFacile);
+    localStorage.setItem("essais", nbEssais);
+    localStorage.setItem("perso1", persoCache1);
+    localStorage.setItem("perso1trouve", personnage1trouve);
+    let cartes=[];
+    for (let i = 0; i < localStorage._nbPerso; i++) {
+        if ($("#"+i).attr('src')=="https://raw.githubusercontent.com/eric-gilles/Projet_Prog/main/images/back.jpg"){
+            cartes[i]=true;
+        } 
+        /*= class="avatar" id="2" onclick="changeImage('2','https://raw.githubusercontent.com/eric-gilles/Projet_Prog/main/images/back.jpg','https://raw.githubusercontent.com/eric-gilles/Projet_Prog/main/images/jsonlg/ipdl.png')">
+    */}
+    localStorage.setItem("cartes", cartes);
+    if(ModeDouble){
+        localStorage.setItem("perso2", persoCache2);
+        localStorage.setItem("perso2trouve", personnage2trouve);
+    }
+    console.log(localStorage);
+}
+
+$(document).ready(function() {
+    if (localStorage.getItem("encours")){
+        if (confirm("Charger Partie en cours ?")==true){
+            nbrePerso = localStorage._nbPerso;
+            Affichage(JSON.parse(localStorage._json));
+            let cartes = localStorage.getItem("cartes");
+            let tab = cartes.split(',');
+            for (let i = 0; i < localStorage._nbPerso; i++) {
+                if (tab[i]=="true") {
+                    changeImage(i, $("#"+i).attr('src'), "https://raw.githubusercontent.com/eric-gilles/Projet_Prog/main/images/back.jpg"); 
+                }
+            }
+            changeImage
+            GenerationChoix(JSON.parse(localStorage._json));
+            ModeDouble = localStorage.getItem("modeD") === "true";
+            ModeFacile = localStorage.getItem("modeF") === "true";    
+            persoCache1 = parseInt(localStorage.getItem("perso1"));  
+            personnage1trouve = localStorage.getItem("perso1trouve") === "true";  
+            nbEssais = parseInt(localStorage.getItem("essais"));  
+            jsonObject = JSON.parse(localStorage._json);
+            if(ModeDouble==true){
+                let essais = nbEssais;
+                persoCache2 = parseInt(localStorage.getItem("perso2"));
+                personnage2trouve = localStorage.getItem("perso2trouve") === "true";
+                InitialisationQuestion();
+                $("#Questions").empty();
+                let html="<div>Est-ce que <select id='Predicat0'><option>...</option><option>au moins un des personnages</option><option>les deux personnages</option><option>aucun des personnages</option></select><select id='attr0' onchange='selectVal(0)'><option>...</option></select><select id='valeur0'></div>";
+                $("#Questions").append(html);
+                LancementDoublePersonnages();
+                $("#NbEssai").empty();
+                $("#NbEssai").append("Nombre de tentatives restantes: "+essais);
+            }else{
+                InitialisationQuestion();
+                $('#MODE_FACILE').removeClass("disabled");
+                $('#MODE_FACILE').attr("onclick","LancementFacile()");
+                $("#NbEssai").empty();
+                $("#NbEssai").append("Nombre de tentatives restantes: "+nbEssais);
+            }
+            if(ModeFacile==true){
+                LancementFacile();
+                $("#valider").attr("onclick","traitementAffichage(1,"+persoCache1+"),RetournementAutomatique()");
+                nbEssais -= 2;
+                $("#NbEssai").empty();
+                $("#NbEssai").append("Nombre de tentatives restantes: "+nbEssais);
+            }
+            document.getElementById('file').remove();
+            document.getElementById('import').remove();
+            var x = document.createElement("INPUT");
+            x.setAttribute("type", "button");
+            x.setAttribute("value", "Sauvegarder Partie");
+            x.setAttribute("id", "save");
+            x.setAttribute("onclick", "save()");
+            x.setAttribute("title", "Permet de sauvegarder sa partie en cours.");
+            $(".proposition")[0].appendChild(x);
+            $('#test').removeClass("disabled");
+            $('#test').attr("onclick","TestPerso()");
+            $("#valider").attr("onclick","traitementAffichage(1,"+persoCache1+"),RetournementAutomatique()");
+            
+        }else{
+            localStorage.clear();
+        }
+    }
+});

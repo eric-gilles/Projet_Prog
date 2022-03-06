@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee">
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" type="image/png" href="Logo-QuiEstce.png"/>
 </head>
 
 <body>
@@ -38,20 +37,20 @@
                                     <!-- les options avec les balises <option></option>-->
                                 </select><br/><br/>
                                 <img src='' id='ImagePersoTentative' class="persoTentative"><br/><br/>
-                                <input onclick="TestPerso()" type="button" value="Valider">
+                                <input class="disabled" onclick="" type="button" id="test" value="Valider">
                             </div>
                             <div class="col-3 col-md-12">
-                                <div class="facile"></br></br></br>
-                                    <input class="disabled" onclick="" type="button" value="MODE FACILE" id="MODE FACILE" title="Dans ce mode, le nombre d'essais est porté à 5. Vous disposez d'un bouton supplémentaire permettant d'estimer la puissance d'une question. Enfin, la validation d'une question entrainera le retournement automatique des personnages éliminés."></br></br>
-                                    <input class="disabled" id="boutonDouble" onclick="" type="button" value="MODE DOUBLE PERSONNAGE" title="Un défi supplémentaire pour les joueurs expérimentés ! Ici, c'est deux personnages qu'il vous faut trouver."></br>
-                                    <p id="NbEssai">Nombre de tentatives restantes: 3</p></br>
+                                <div class="facile"><br><br><br>
+                                    <input class="disabled" onclick="" type="button" value="MODE FACILE" id="MODE_FACILE" title="Dans ce mode, le nombre d'essais est porté à 5. Vous disposez d'un bouton supplémentaire permettant d'estimer la puissance d'une question. Enfin, la validation d'une question entrainera le retournement automatique des personnages éliminés."><br><br>
+                                    <input class="disabled" id="boutonDouble" onclick="" type="button" value="MODE DOUBLE PERSONNAGE" title="Un défi supplémentaire pour les joueurs expérimentés ! Ici, c'est deux personnages qu'il vous faut trouver."><br>
+                                    <p id="NbEssai">Nombre de tentatives restantes: 3</p><br>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div> </br>
+        </div><br>
         <div class="container-fluid">
             <div id="ZoneQuestion" class="row">
                 <div id="Questions">
@@ -72,8 +71,8 @@
             <input type="button" value="Ajout Question" id="addquestion">
         </div>
     </div><hr>
-    <input type="file" id="file" value="Import"/><br/>
-    <button id="import">Importer</button>
+    <input type="file" id="file" title="Choisir un fichier json."/><br/>
+    <button id="import" title="Importer le fichier json choisi précédemment.">Importer</button>
     <p id="result"></p>
     <script>
         document.getElementById('import').onclick = function() {
@@ -84,17 +83,28 @@
             var fr = new FileReader();
             fr.onload = function(e) {
                 var parsed = JSON.parse(e.target.result);
+                localStorage._json = e.target.result;
+                localStorage._nbPerso = parsed.personnages.length;
                 Affichage(parsed);
                 ChoixPersonnage(parsed);
                 GenerationChoix(parsed);
-                InitialisationQuestion(parsed);
-            }
+                InitialisationQuestion();
+                var x = document.createElement("INPUT");
+                x.setAttribute("type", "button");
+                x.setAttribute("value", "Sauvegarder Partie");
+                x.setAttribute("id", "save");
+                x.setAttribute("onclick", "save()");
+                x.setAttribute("title", "Permet de sauvegarder sa partie en cours.");
+                document.getElementsByClassName("proposition")[0].appendChild(x);
+            };
             fr.readAsText(files.item(0));
             document.getElementById('file').remove();
             document.getElementById('import').remove();
-            document.getElementById('MODE FACILE').className = "";
+            document.getElementById('test').className = "";
+            document.getElementById('MODE_FACILE').className = "";
             document.getElementById('boutonDouble').className = "";
-            document.getElementById('MODE FACILE').setAttribute("onclick","LancementFacile()");
+            document.getElementById('test').setAttribute("onclick","TestPerso()");
+            document.getElementById('MODE_FACILE').setAttribute("onclick","LancementFacile()");
             document.getElementById('boutonDouble').setAttribute("onclick","ConstruitQuestionModeDouble(),LancementDoublePersonnages()");
         };
     </script>

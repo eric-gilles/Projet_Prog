@@ -1,4 +1,4 @@
-const { cp } = require("fs");
+//const { cp } = require("fs");
 
 function Affichage(json){
     let nbElement = 0;
@@ -17,7 +17,7 @@ function Affichage(json){
                 nbElement += 1;
                 let fonctionChangeImage = `changeImage('`+idImg+`','`+d.image+`','https://raw.githubusercontent.com/eric-gilles/Projet_Prog/main/images/back.jpg')`;
                 html += `<td class="caseTableau"><img src='`+d.image+`' class="avatar" id="`+idImg+`"`;
-                html += `onclick="`+fonctionChangeImage+`"></div><p class="nom">`;
+                html += `onclick="`+fonctionChangeImage+`"><p class="nom">`;
                 html += d.nom;
                 html += `</p></td>`;
                 idImg += 1;
@@ -38,6 +38,6 @@ function changeImage(idImg,oldImageLink,newImageLink){
         document.getElementById(idImg).setAttribute("onclick","changeImage('"+idImg+"','"+newImageLink+"','"+oldImageLink+"')");
         setTimeout(function(){
             document.getElementById(idImg).setAttribute("class","avatar");
-        }, 800); 
-    }, 800);
+        }, 630); 
+    }, 630);
 }
