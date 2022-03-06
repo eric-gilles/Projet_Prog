@@ -459,6 +459,14 @@ function save(){
     localStorage.setItem("essais", nbEssais);
     localStorage.setItem("perso1", persoCache1);
     localStorage.setItem("perso1trouve", personnage1trouve);
+    let cartes=[];
+    for (let i = 0; i < localStorage._nbPerso; i++) {
+        if ($("#"+i).attr('src')=="https://raw.githubusercontent.com/eric-gilles/Projet_Prog/main/images/back.jpg"){
+            cartes[i]=true;
+        } 
+        /*= class="avatar" id="2" onclick="changeImage('2','https://raw.githubusercontent.com/eric-gilles/Projet_Prog/main/images/back.jpg','https://raw.githubusercontent.com/eric-gilles/Projet_Prog/main/images/jsonlg/ipdl.png')">
+    */}
+    localStorage.setItem("cartes", cartes);
     if(ModeDouble){
         localStorage.setItem("perso2", persoCache2);
         localStorage.setItem("perso2trouve", personnage2trouve);
@@ -471,7 +479,19 @@ $(document).ready(function() {
         if (confirm("Charger Partie en cours ?")==true){
             console.log(localStorage);
             console.log(JSON.parse(localStorage._json));
+            nbrePerso = localStorage._nbPerso;
             Affichage(JSON.parse(localStorage._json));
+            let cartes = localStorage.getItem("cartes");
+            let tab = cartes.split(',');
+            console.log(cartes);
+            for (let i = 0; i < localStorage._nbPerso; i++) {
+                console.log("for images")
+                if (tab[i]=="true") {
+                    console.log("if images")
+                    changeImage(i, $("#"+i).attr('src'), "https://raw.githubusercontent.com/eric-gilles/Projet_Prog/main/images/back.jpg"); 
+                }
+            }
+            changeImage
             GenerationChoix(JSON.parse(localStorage._json));
             ModeDouble = localStorage.getItem("modeD") === "true";
             ModeFacile = localStorage.getItem("modeF") === "true";    
