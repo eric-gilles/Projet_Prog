@@ -7,8 +7,8 @@ Membres du groupe :
     - Morgan NAVEL (GrA - CMI)
 
 Pour installer les fichiers :
-    Récupérer le fichier .zip sur Moodle dans la zone de dépot du rendu du 6 mars;
-    Extraire le fichier;
+    Récupérer le fichier .zip sur Moodle dans la zone de dépot du rendu du 6 mars,
+    Extraire le fichier.
 
 Pour lancer le jeu : 
     >   Si vous utilisez Linux, lancez simplement "QuiEstCe Lanceur" dans le dossier principal.
