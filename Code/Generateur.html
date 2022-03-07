@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <title>GENERATEUR JSON</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="./FonctionG.js"></script>
+</head>
+
+<body>
+    <div id="main">
+        <div class="HautDePage">
+            <div class="row">
+                <div class="col-12 col-md-9">
+                    <div class="cadre">
+                        <div class="grille" id="Personnages">
+                            <!--Affichage des images ici-->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-3">
+                    <div class="proposition">
+                        <div class="row">
+                            <div class="col-3 col-md-12">
+                                <img src="Logo-QuiEstce.png" alt="Qui Est-ce?" class="logo" onclick="location.reload()" title="Recharger la page">
+                            </div>
+                            <div class="col-6 col-md-12">
+                                      
+                            </div>
+                            <div class="col-3 col-md-12">
+                                <div class="listAttribut"><br><br><br>
+                                    <h3>Liste des attributs</h3><br>
+                                    <input type="text" id="attr0"></br>
+                                </div>
+                                <input type="button" id="addAttribut" value="+" onclick="AjoutAttribut()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><br>
+        <div class="row">  
+            <div id="import" class="col-2">
+                <input type="file" id="file" title="Choisir une image."/><br/><br/>
+                <button id="import" title="Importer l'image choisie précédemment.">Importer</button>
+            </div>
+            <div id="attr" class="col-2">
+                <div class="attributs">allo---------------------------------------------------------------------------</div>
+                <div class="attributs">allo</div>
+                <div class="attributs">allo---------------------------------------------------------------------------</div>
+                <div class="attributs">allo---------------------------------------------------------------------------</div>
+                <div class="attributs">allo---------------------------------------------------------------------------</div>
+                <div class="attributs">allo---------------------------------------------------------------------------</div>
+                <div class="attributs">allo---------------------------------------------------------------------------</div>
+            </div>
+            <div class="col-8">
+                <div class="row">
+                    <div id="valeurs" class="col-7">
+                        <input type="text" class="val" id="valeur0"></br>
+                        <input type="text" class="val" id="valeur1"></br>
+                        <input type="text" class="val" id="valeur2"></br>
+                        <input type="text" class="val" id="valeur3"></br>
+                        <input type="text" class="val" id="valeur4"></br>
+                        <input type="text" class="val" id="valeur5"></br>
+                        <input type="text" class="val" id="valeur6"></br>
+                    </div>
+                    <div id="button" class="col-5">
+                        <input class="validation" type="button" value="VALIDER"><br/>
+                        <input class="validation" type="button" value="CONVERSION">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+    <script>
+        document.getElementById('import').onclick = function() {
+            var files = document.getElementById('file').files;
+            if (files.length <= 0) {
+                return false;
+            }
+            var fr = new FileReader();
+            fr.onload = function(e) {
+                var parsed = JSON.parse(e.target.result);
+                localStorage._json = e.target.result;
+                localStorage._nbPerso = parsed.personnages.length;
+                Affichage(parsed);
+                ChoixPersonnage(parsed);
+                GenerationChoix(parsed);
+                InitialisationQuestion();
+                var x = document.createElement("INPUT");
+                x.setAttribute("type", "button");
+                x.setAttribute("value", "Sauvegarder Partie");
+                x.setAttribute("id", "save");
+                x.setAttribute("onclick", "save()");
+                x.setAttribute("title", "Permet de sauvegarder sa partie en cours.");
+                document.getElementsByClassName("proposition")[0].appendChild(x);
+            };
+            fr.readAsText(files.item(0));
+            document.getElementById('file').remove();
+            document.getElementById('import').remove();
+            document.getElementById('test').className = "";
+            document.getElementById('MODE_FACILE').className = "";
+            document.getElementById('boutonDouble').className = "";
+            document.getElementById('test').setAttribute("onclick","TestPerso()");
+            document.getElementById('MODE_FACILE').setAttribute("onclick","LancementFacile()");
+            document.getElementById('boutonDouble').setAttribute("onclick","ConstruitQuestionModeDouble(),LancementDoublePersonnages()");
+        };
+    </script>
+</body>
+</html>
