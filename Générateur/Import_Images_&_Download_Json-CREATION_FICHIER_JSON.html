@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="grille" id="Personnages">
+        <table id="table"><tr></tr></table>
+    </div>
+    <input type="file" id="file" onchange="readURL(this);">
+
+    <a id="downloadAnchorElem" style="display:none"></a>
+</body>
+<script>
+    var idImg = 0;
+    var nbElement = 0;
+    var colonne = 0;
+    var listePersonnages = new object();
+
+    //Crée l'objet d'un personnage
+    function creationnObjetPerso(){
+        var personnage = new object();
+        personnages.nom = $("valeurNom").val;
+        personnages.image = /*Lien de l'image*/"";
+        personnages.attributs = new object();
+        for(let i=0;i<nbAttribut;i++){
+            personnages.attributs[$("attr"+i).val] = $("valeur"+i).split(",");
+        }
+        listePersonnages[$("valeurNom").val] = personnage;
+    }
+
+    //Convertit les personnages en un objet JSON
+    function conversionJSON(){
+        var json = new object();
+        json.personnages = [];
+        let index = 0;
+        for(let o of listePersonnages){
+           json.personnages[index] = o;
+           index += 1; 
+        }
+        downloadObjectAsJson(json,"GrillePersonnageUtilisateur");
+    }
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var fr = new FileReader();
+            fr.onload = function (e) {
+                nbElement++;
+                if(nbElement == 5){
+                    $("#table").find('tbody').append('<tr></tr>');
+                }
+                var x = document.createElement("img");
+                x.setAttribute("src", e.target.result);//lien d'environ 62000 caractères
+                x.setAttribute("class", "avatar");
+                x.setAttribute("id", idImg);
+                document.getElementById("table").rows[colonne].insertCell(-1).appendChild(x);
+                idImg++;
+            };
+            fr.readAsDataURL(input.files[0]);
+            if (nbElement == 5) {colonne++;nbElement = 0; }
+        }
+    }
+
+
+
+
+
+    //Téléchargement d'un fichier json
+    //var dict = {"one" : [15, 4.5], "two" : [34, 3.3], "three" : [67, 5.0], "four" : [32, 4.1]};
+    downloadObjectAsJson(dict, "test");
+
+    function downloadObjectAsJson(Obj, Name){
+        var data = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(Obj));
+        var download = document.createElement('a');
+        download.setAttribute("href", data);
+        download.setAttribute("download", Name + ".json");
+        document.body.appendChild(download); // required for firefox
+        download.click();
+        download.remove();
+    }
+</script>
+</html>
