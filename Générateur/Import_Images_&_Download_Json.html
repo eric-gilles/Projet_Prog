@@ -27,6 +27,7 @@
     var listePersonnages = new object();
 
     //Crée l'objet d'un personnage
+<<<<<<< HEAD
     function creationObjetPerso(){
         var personnage = new object();
         personnages.nom = $("valeurNom").val;
@@ -36,6 +37,23 @@
             personnages.attributs[$("attr"+i).val] = $("valeur"+i).split(",");
         }
         listePersonnages[$("valeurNom").val] = personnage;
+=======
+    function creationnObjetPerso(){
+        let erreur = false;
+        if($("valeurNom").val != null && $((nbPersonnage-1).toString()).src != null){
+            var personnage = new Object();
+            personnages.nom = $("valeurNom").val;
+            personnages.image = $((nbPersonnage-1).toString()).src;
+            personnages.attributs = new object();
+            for(let i=0;i<nbAttribut;i++){
+                if(personnages.attributs[$("attr"+i).val] != null &&  $("valeur"+i) != null){
+                    personnages.attributs[$("attr"+i).val] = $("valeur"+i).split(",");
+                }
+                else {erreur = true;}
+            }
+        } else {erreur = true;}
+        if (!erreur) {listePersonnages[$("valeurNom").val] = personnage;}
+>>>>>>> bccf495302cd3b977772295ce7d9b9467fe9a28c
     }
 
     //Convertit les personnages en un objet JSON
