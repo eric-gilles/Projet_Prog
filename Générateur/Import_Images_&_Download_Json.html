@@ -16,7 +16,7 @@
     <div class="grille" id="Personnages">
         <table id="table"><tr></tr></table>
     </div>
-    <input type="file" id="file" onchange="readURL(this);">
+    <input type="file" id="file">
 
     <a id="downloadAnchorElem" style="display:none"></a>
 </body>
@@ -27,7 +27,7 @@
     var listePersonnages = new object();
 
     //Crée l'objet d'un personnage
-    function creationnObjetPerso(){
+    function creationObjetPerso(){
         var personnage = new object();
         personnages.nom = $("valeurNom").val;
         personnages.image = /*Lien de l'image*/"";
@@ -50,14 +50,13 @@
         downloadObjectAsJson(json,"GrillePersonnageUtilisateur");
     }
 
-    function readURL(input) {
-        if (input.files && input.files[0]) {
+    //fonction d'ajout des images et affichage dans le tableau
+    $("#file").change(function(){
+        if (this.files && this.files[0]) {
             var fr = new FileReader();
             fr.onload = function (e) {
                 nbElement++;
-                if(nbElement == 5){
-                    $("#table").find('tbody').append('<tr></tr>');
-                }
+                if(nbElement == 5) $("#table").find('tbody').append('<tr></tr>');
                 var x = document.createElement("img");
                 x.setAttribute("src", e.target.result);//lien d'environ 62000 caractères
                 x.setAttribute("class", "avatar");
@@ -65,19 +64,19 @@
                 document.getElementById("table").rows[colonne].insertCell(-1).appendChild(x);
                 idImg++;
             };
-            fr.readAsDataURL(input.files[0]);
-            if (nbElement == 5) {colonne++;nbElement = 0; }
+            fr.readAsDataURL(this.files[0]);
+            if (nbElement == 5) {
+                colonne++;
+                nbElement = 0;
+            }
         }
-    }
+    });
 
 
 
 
 
     //Téléchargement d'un fichier json
-    //var dict = {"one" : [15, 4.5], "two" : [34, 3.3], "three" : [67, 5.0], "four" : [32, 4.1]};
-    downloadObjectAsJson(dict, "test");
-
     function downloadObjectAsJson(Obj, Name){
         var data = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(Obj));
         var download = document.createElement('a');
