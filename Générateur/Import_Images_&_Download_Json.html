@@ -24,6 +24,32 @@
     var idImg = 0;
     var nbElement = 0;
     var colonne = 0;
+    var listePersonnages = new object();
+
+    //Crée l'objet d'un personnage
+    function creationnObjetPerso(){
+        var personnage = new object();
+        personnages.nom = $("valeurNom").val;
+        personnages.image = /*Lien de l'image*/"";
+        personnages.attributs = new object();
+        for(let i=0;i<nbAttribut;i++){
+            personnages.attributs[$("attr"+i).val] = $("valeur"+i).split(",");
+        }
+        listePersonnages[$("valeurNom").val] = personnage;
+    }
+
+    //Convertit les personnages en un objet JSON
+    function conversionJSON(){
+        var json = new object();
+        json.personnages = [];
+        let index = 0;
+        for(let o of listePersonnages){
+           json.personnages[index] = o;
+           index += 1; 
+        }
+        downloadObjectAsJson(json,"GrillePersonnageUtilisateur");
+    }
+
     function readURL(input) {
         if (input.files && input.files[0]) {
             var fr = new FileReader();
