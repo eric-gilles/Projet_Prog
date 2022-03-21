@@ -41,7 +41,7 @@ function SupprAttribut(indiceA){
 }
 
 //Crée l'objet d'un personnage
-function creationnObjetPerso(){
+function creationObjetPerso(){
     let erreur = false;
     if($("valeurNom").val != null && $((nbPersonnage-1).toString()).src != null){
         var personnage = new Object();
@@ -71,26 +71,27 @@ function conversionJSON(){
 }
 
 //fonction d'ajout des images et affichage dans le tableau
-$("#file").change(function(){
-    if (this.files && this.files[0]) {
+function importIMG(){
+    let input = document.getElementById("file");
+    if (input.files && input.files[0]) {
         var fr = new FileReader();
         fr.onload = function (e) {
-            nbElement++;
-            if(nbElement == 5) $("#table").find('tbody').append('<tr></tr>');
-            var x = document.createElement("img");
-            x.setAttribute("src", e.target.result);//lien d'environ 62000 caractères
-            x.setAttribute("class", "avatar");
-            x.setAttribute("id", idImg);
-            document.getElementById("table").rows[colonne].insertCell(-1).appendChild(x);
-            idImg++;
-        };
-        fr.readAsDataURL(this.files[0]);
+        nbElement++;
+        if(nbElement == 5) $("#table").find('tbody').append('<tr></tr>');
+        var x = document.createElement("img");
+        x.setAttribute("src", e.target.result);//lien d'environ 62000 caractères
+        x.setAttribute("class", "avatar");
+        x.setAttribute("id", nbPersonnage);
+        document.getElementById("table").rows[colonne].insertCell(-1).appendChild(x);
+        nbPersonnage++;
+    };
+    fr.readAsDataURL(input.files[0]);
         if (nbElement == 5) {
             colonne++;
             nbElement = 0;
         }
     }
-});
+}
 
 //Téléchargement d'un fichier json
 function downloadObjectAsJson(Obj, Name){
