@@ -30,54 +30,49 @@
                             <div class="col-3 col-md-12">
                                 <img src="Logo-QuiEstce.png" alt="Qui Est-ce?" class="logo" onclick="location.reload()" title="Recharger la page">
                             </div>
-                            <div class="col-6 col-md-12">
-                                      
-                            </div>
-                            <div class="col-3 col-md-12">
-                                <div class="listAttribut"><br><br><br>
-                                    <h3>Liste des attributs</h3><br>
-                                    <input type="text" id="attr0"></br>
-                                </div>
-                                <input type="button" id="addAttribut" value="+" onclick="AjoutAttribut()">
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div><br>
         <div class="row">  
-            <div id="import" class="col-2">
-                <input type="file" id="file" title="Choisir une image."/><br/><br/>
-                <button id="import" title="Importer l'image choisie précédemment.">Importer</button>
-            </div>
             <div id="attr" class="col-2">
-                <div class="attributs">allo---------------------------------------------------------------------------</div>
-                <div class="attributs">allo</div>
-                <div class="attributs">allo---------------------------------------------------------------------------</div>
-                <div class="attributs">allo---------------------------------------------------------------------------</div>
-                <div class="attributs">allo---------------------------------------------------------------------------</div>
-                <div class="attributs">allo---------------------------------------------------------------------------</div>
-                <div class="attributs">allo---------------------------------------------------------------------------</div>
+                <div class="attributs">Nom: </div>
+                <div id="LigneAttr0" class="attributs">Attribut 0 :</div>
             </div>
-            <div class="col-8">
-                <div class="row">
+            <!-- <div class="col-10"> -->
+                <!-- <div class="row"> -->
                     <div id="valeurs" class="col-7">
+                        <input type="text" class="val" id="valeurNom"></br>
                         <input type="text" class="val" id="valeur0"></br>
-                        <input type="text" class="val" id="valeur1"></br>
-                        <input type="text" class="val" id="valeur2"></br>
-                        <input type="text" class="val" id="valeur3"></br>
-                        <input type="text" class="val" id="valeur4"></br>
-                        <input type="text" class="val" id="valeur5"></br>
-                        <input type="text" class="val" id="valeur6"></br>
                     </div>
-                    <div id="button" class="col-5">
-                        <input class="validation" type="button" value="VALIDER"><br/>
-                        <input class="validation" type="button" value="CONVERSION">
+                    <div id="button" class="col-3">
+                        <div class="col-12 col-md-12">
+                            <div class="listAttribut">
+                                <h5>Liste des attributs</h5><br>
+                                <input type="text" id="attr0"></br>
+                            </div>
+                            <input type="button" id="addAttribut" value="+" onclick="AjoutAttribut()">        
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div> 
+        <div class="row">
+            <div id="import" class="col-2">
+                <input type="file" id="file" title="Choisir une image."/><br/><br/>
+                <button id="import" title="Importer l'image choisie précédemment.">Importer</button>
+            </div>
+            <div class="col-7"></div>
+            <div id="validation" class="col-3">
+                <br/>
+                <input id="VALIDER" type="button" value="VALIDER">
+                <br/><br/>
+                <input id="CONVERSION" type="button" value="TELECHARGER JSON">
+            </div>
+
+        </div>
+    </div>
     <script>
         document.getElementById('import').onclick = function() {
             var files = document.getElementById('file').files;
