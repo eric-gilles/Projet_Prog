@@ -96,12 +96,8 @@ body {
 /*css bouton*/
 input{
     border-radius: 15px;
-    height:auto;
-    transition: all 500ms ease-out;
 }
-input:hover{
-    background-color: rgb(253, 186, 0); 
-}
+
 .caseTableau{
     padding: 10px;
     width: 20%;
@@ -126,7 +122,7 @@ input[type=button] {
     border-radius: 5px;
     font-size: 100%;  
     background-color: #ffffff;
-  }
+}
   
 input[type=button]:hover:not(.disabled) {
     background-color: #f7bd01;
@@ -159,12 +155,29 @@ td:hover {
 /*Partie générateur*/
 
 .val{
-    width:100%;
+    width:80%;
 }
 .attributs{
     padding-top: 1px;
-    padding-bottom: 5.6px;  
+    padding-bottom: 5.6px;
+    padding-left: 10px;  
 }
 #button{
     text-align: center;
 }
+#validation{
+    text-align: center;
+}
+#validation:hover{
+    cursor: pointer;
+}
+#CONVERSION{
+    font-size: x-large;
+    background: linear-gradient(#0065fc, rgb(86, 171, 255));
+    border: none;
+}
+#CONVERSION:hover{
+    background: linear-gradient(#0060f0, rgb(59, 157, 255));
+    cursor: pointer;
+}
+
