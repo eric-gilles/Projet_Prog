@@ -89,13 +89,7 @@
                 ChoixPersonnage(parsed);
                 GenerationChoix(parsed);
                 InitialisationQuestion();
-                var x = document.createElement("INPUT");
-                x.setAttribute("type", "button");
-                x.setAttribute("value", "Sauvegarder Partie");
-                x.setAttribute("id", "save");
-                x.setAttribute("onclick", "save()");
-                x.setAttribute("title", "Permet de sauvegarder sa partie en cours.");
-                document.getElementsByClassName("proposition")[0].appendChild(x);
+                $("<input type='button' value='Sauvegarder Partie' id='save' onclick='save()' title='Permet de sauvegarder sa partie en cours.'>").appendTo($(".proposition")[0]);
             };
             fr.readAsText(files.item(0));
             document.getElementById('file').remove();

@@ -525,15 +525,9 @@ $(document).ready(function() {
                 $("#NbEssai").empty();
                 $("#NbEssai").append("Nombre de tentatives restantes: "+nbEssais);
             }
-            document.getElementById('file').remove();
-            document.getElementById('import').remove();
-            var x = document.createElement("INPUT");
-            x.setAttribute("type", "button");
-            x.setAttribute("value", "Sauvegarder Partie");
-            x.setAttribute("id", "save");
-            x.setAttribute("onclick", "save()");
-            x.setAttribute("title", "Permet de sauvegarder sa partie en cours.");
-            $(".proposition")[0].appendChild(x);
+            $('#file').remove();
+            $('#import').remove();
+            $("<input type='button' value='Sauvegarder Partie' id='save' onclick='save()' title='Permet de sauvegarder sa partie en cours.'>").appendTo($(".proposition")[0]);
             $('#test').removeClass("disabled");
             $('#test').attr("onclick","TestPerso()");
             $("#valider").attr("onclick","traitementAffichage(1,"+persoCache1+"),RetournementAutomatique()");
