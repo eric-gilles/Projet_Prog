@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee">
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="./FonctionG.js"></script>
+    
 </head>
 
 <body>
@@ -61,8 +63,13 @@
         </div>
         <div class="row">
             <div id="import" class="col-2">
-                <input type="file" id="file" title="Choisir une image."/><br/><br/>
-                <button id="import" onclick="importIMG()" title="Importer l'image choisie précédemment.">Importer</button>
+                <select id="addimg" title="Ajouter l'image du personnage." onchange="addImg()">
+                    <option value="0">...</option>
+                    <option value="1">Image local</option>
+                    <option value="2">Image Url</option>
+                </select>
+                <!-- <input type="file" id="file" title="Choisir une image."/>--><br/><br/>
+                <input type="button" id="import" onclick="importIMG()" title="Importer l'image choisie précédemment."value="Importer">
             </div>
             <div class="col-7"></div>
             <div id="validation" class="col-3">

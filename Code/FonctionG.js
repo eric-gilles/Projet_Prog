@@ -35,9 +35,3 @@ function SupprAttribut(indiceA){
     }
     nbAttribut--;
 }
-//doit prendre toutes les valeurs et les attributs pour faire un dictionnaire comment dans les fichiers JSON
-function getValues(){ 
-    let dicoPersonnage={"nom":$("#valeurNom").val(),"image":$(nbPersonnage-1).attr("src"),"attributs":null}
-    let dicoAttribut={}
-    for(let i=0;i<nbLignes){}
-}
