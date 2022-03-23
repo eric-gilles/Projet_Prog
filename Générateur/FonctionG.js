@@ -101,6 +101,7 @@ function importIMG(){
         x.setAttribute("class", "avatar");
         x.setAttribute("id", nbPersonnage);
         document.getElementById("table").rows[colonne].insertCell(-1).appendChild(x);
+        $("#"+(nbPersonnage)).after("<p id='nom"+nbPersonnage+"'>jnsdfndsjfosdjoijf <i class='fa fa-trash-o' style='font-size:24px'></i></p>");
         nbPersonnage++;
         if (nbElement == 5) {
             colonne++;
