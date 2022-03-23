@@ -171,12 +171,8 @@ function InitialisationQuestion(){
                     htmlBis += '<option>ET</option> <option>OU</option> </select>'; //Création des options du ET | OU
                     htmlBis += '</br>Est-ce que ce/ces personnages <select id="attr'+(x-1)+'">'; //Création de la partie 1 de la question
                     htmlBis += html+'</select><select id="valeur'+(x-1)+'"></select> ?'; //Création de la partie 2 de la question
-                    if (x-2>0) {
-                        $("#s"+(x-2)).remove();
-                    }
-                    htmlBis += '<a href=# id="s'+(x-1)+'" class="delete">supprimer</a> </select> </div>'; //Création du bouton de suppression
-                    $(div).append(htmlBis); //add select
-                } 
+                }
+                
                 $("#attr"+(x-1)).attr("onchange","selectVal("+(x-1)+")");
                 if(ModeDouble){
                     $("#valider").attr("onclick","traitementQuestionsModeDouble("+x+")");
@@ -209,7 +205,7 @@ function InitialisationQuestion(){
 //Construit les questions de la bonne façon pour jouer au Mode Double Personnage Caché
 function ConstruitQuestionModeDouble(){
     $("#Questions").empty();
-    let html="<div>Est-ce que <select id='Predicat0'><option>...</option><option>au moins un des personnages</option><option>les deux personnages</option><option>aucun des personnages</option></select><select id='attr0' onchange='selectVal(0)'><option>...</option></select><select id='valeur0'></div>";
+    let html="<div id='d0'>Est-ce que <select id='Predicat0'><option>...</option><option>au moins un des personnages</option><option>les deux personnages</option><option>aucun des personnages</option></select><select id='attr0' onchange='selectVal(0)'><option>...</option></select><select id='valeur0'></div>";
     $("#Questions").append(html);
     for(let a in jsonObject.personnages[0].attributs){
         html="";
