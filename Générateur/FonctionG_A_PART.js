@@ -49,10 +49,9 @@ var nbPersoPrevious = 0;
 function creationObjetPerso(){
     console.log("lancement création Personnage");
     let erreur = false;
+    let personnage = new Object();
     console.log("Nombre de personnages : ", nbPersonnage)
     if($("#valeurNom").val() != "" && nbPersoPrevious+1 == nbPersonnage){
-        nbPersoPrevious += 1;
-        var personnage = new Object();
         personnage.nom = $("#valeurNom").val();
         personnage.image = document.getElementById(nbPersonnage-1).src;
         personnage.attributs = new Object();
@@ -60,14 +59,28 @@ function creationObjetPerso(){
             console.log($("#attr"+i).val());
             console.log($("#valeur"+i).val());
             if($("#attr"+i).val() != null &&  $("#valeur"+i).val() != null){
-                console.log("coucou");
                 personnage.attributs[$("#attr"+i).val()] = $("#valeur"+i).val().split(",");
                 $("#valeur"+i).val("");
             }
-            else {erreur = true;}
+            else {
+                erreur = true;
+                console.log("erreur 1 : "+erreur);
+            }
         }
     } else {erreur = true;}
+    console.log("erreur 2 :"+erreur);
+    let var1;
+    let var2;
+    for(let o of listeNom){
+        var1 = JSON.stringify(personnage.attributs);
+        var2 = JSON.stringify(listePersonnages[o].attributs);
+        if ((var1 == var2) || (personnage.nom == listePersonnages[o].nom)) {
+            erreur = true;
+        }
+    }
+    console.log("erreur 3 : "+erreur);
     if (!erreur) {
+        nbPersoPrevious += 1;
         $("#addAttribut").remove();
         for(let i=0;i<nbAttribut;i++){
             $("#attr"+i).prop("disabled",true);
