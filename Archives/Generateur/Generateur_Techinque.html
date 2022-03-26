@@ -38,8 +38,8 @@
         </div><br>
         <div class="row">  
             <div id="attr" class="col-2">
-                <div class="attributs">Nom du personnage : </div>
-                <div id="LigneAttr0" class="attributs">1er Attribut : </div>
+                <div class="attributs">Nom du personnage</div>
+                <div id="LigneAttr0" class="attributs">1er Attribut</div>
             </div>
             <!-- <div class="col-10"> -->
                 <!-- <div class="row"> -->
@@ -84,8 +84,17 @@
                 $('#attr'+i).on('input',function(e){
                     if($('#attr'+i).val() != ""){
                         $('#LigneAttr'+i).empty();
-                        $('#LigneAttr'+i).append($('#attr'+i).val()+" :");
+                        $('#LigneAttr'+i).append($('#attr'+i).val()+"");
                     } 
+                    else {
+                        $('#LigneAttr'+i).empty();
+                        if (i==0){
+                            $('#LigneAttr'+i).append((i+1)+"er Attribut");
+                        }
+                        else {
+                            $('#LigneAttr'+i).append((i+1)+"ème Attribut");
+                        }
+                    }
                 });
             }
         }

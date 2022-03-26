@@ -40,8 +40,8 @@ tr{
     width: 100%;
 } 
 td{
-    max-height: 100%;
-    max-width: 20%;
+    max-width: 245px;
+    max-height: 245px;
     vertical-align: top;
 }  
 
@@ -156,11 +156,13 @@ td:hover {
 
 .val{
     width:80%;
+    margin-top:2%;
 }
 .attributs{
     padding-top: 0.7px;
     padding-bottom: 5.6px;
     padding-left: 10px;  
+    margin-top:2.55%;
 }
 #button{
     text-align: center;
@@ -173,11 +175,8 @@ td:hover {
 }
 #CONVERSION{
     font-size: x-large;
-    background: linear-gradient(#0065fc, rgb(86, 171, 255));
-    border: none;
 }
-#CONVERSION:hover{
-    background: linear-gradient(#0060f0, rgb(59, 157, 255));
+i:hover{
     cursor: pointer;
 }
 

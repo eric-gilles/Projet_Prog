@@ -11,8 +11,8 @@ var listeNom = [];
 function AjoutAttribut(){
     let html='<div id="div'+nbAttribut+'"><input class="saisieAttributs" type="text" id="attr'+nbAttribut+'"><input onclick="SupprAttribut('+nbAttribut+')" id="suppr'+nbAttribut+'" class="supprA" type="button" value="-"></br></div>';
     $(".listAttribut").append(html);
-    html="<br/><div id='LigneAttr"+nbAttribut+"'class='attributs'>"+(nbAttribut+1)+"ème Attribut :</div>";
-    let html2="<br/><div><input type='text' class='val' id='valeur"+nbAttribut+"'></br></div>"
+    html="<div id='LigneAttr"+nbAttribut+"'class='attributs'>"+(nbAttribut+1)+"ème Attribut</div>";
+    let html2="<div><input type='text' class='val' id='valeur"+nbAttribut+"'></br></div>"
     $("#attr").append(html);
     $("#valeurs").append(html2);
     nbAttribut++;
@@ -32,9 +32,7 @@ function SupprAttribut(indiceA){
     for(let i=indiceA+1;i<nbAttribut;i++){
         $("#LigneAttr"+i).empty();
         $("#LigneAttr"+i).attr("id","LigneAttr"+(i-1));
-        html="<div id='LigneAttr"+(i-1)+"'class='attributs'>"+$("#attr"+i).val()+":</div>";
-        console.log(html);
-        $("#LigneAttr"+(i-1)).append(html);
+        $("#LigneAttr"+(i-1)).append($("#attr"+i).val());
         $("#suppr"+i).attr("onclick","SupprAttribut("+(i-1)+")");
         $("#attr"+i).attr("id","attr"+(i-1));
         $("#suppr"+i).attr("id","suppr"+(i-1));
@@ -42,6 +40,7 @@ function SupprAttribut(indiceA){
         $("#valeur"+i).attr("id","valeur"+(i-1));
     }
     nbAttribut--;
+    AffichageDyn();
 }
 
 var nbPersoPrevious = 0;
@@ -56,19 +55,21 @@ function creationObjetPerso(){
         personnage.image = document.getElementById(nbPersonnage-1).src;
         personnage.attributs = new Object();
         for(let i=0;i<nbAttribut;i++){
-            console.log($("#attr"+i).val());
-            console.log($("#valeur"+i).val());
             if($("#attr"+i).val() != null &&  $("#valeur"+i).val() != null){
                 personnage.attributs[$("#attr"+i).val()] = $("#valeur"+i).val().split(",");
                 $("#valeur"+i).val("");
             }
             else {
                 erreur = true;
-                console.log("erreur 1 : "+erreur);
+                console.log("Erreur : Attribut ou valeur null");
+                alert("L'un des attributs n'est pas renseigné correctement ou est vide");
             }
         }
-    } else {erreur = true;}
-    console.log("erreur 2 :"+erreur);
+    } else {
+        erreur = true;
+        console.log("Erreur : Nombre de personnage non incrémenté");
+        alert("Veuillez ajouter une image pour votre personnage");
+    }
     let var1;
     let var2;
     for(let o of listeNom){
@@ -76,9 +77,10 @@ function creationObjetPerso(){
         var2 = JSON.stringify(listePersonnages[o].attributs);
         if ((var1 == var2) || (personnage.nom == listePersonnages[o].nom)) {
             erreur = true;
+            console.log("Erreur : Le nouveau personnage est idéférenciable d'un personnage déjà crée ou porte le même nom");
+            alert("Attention, le nouveau personnage est idéférenciable d'un personnage déjà crée ou porte le même nom");
         }
     }
-    console.log("erreur 3 : "+erreur);
     if (!erreur) {
         nbPersoPrevious += 1;
         $("#addAttribut").remove();
@@ -96,15 +98,13 @@ function creationObjetPerso(){
         console.log(listeNom);
         $("#valeurNom").val("");
         $("#importButton").prop("disabled",false);
-    } else {
-        console.log("Erreur : Entrée personnage invalide");
     }
 }
 
 
 //Convertit les personnages en un objet JSON
 function conversionJSON(){
-    console.log(listePersonnages);
+    console.log("Liste des personnages : \n"+listePersonnages);
     var json = new Object();
     json.personnages = [];
     let index = 0;
