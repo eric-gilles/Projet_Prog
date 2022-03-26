@@ -154,6 +154,7 @@ function InitialisationQuestion(){
         $(add_button).click(function(e) {
             e.preventDefault();
             var html="<option>...</option>";
+            let htmlBis=""
             if(ModeDouble && firstTime){ //x doit revenir à la première question quand on change en mode double
                 x=1;
                 firstTime=false;
@@ -164,15 +165,19 @@ function InitialisationQuestion(){
                     html+="<option id='"+a+"'>"+a+"</option>";
                 }
                 if(ModeDouble){
-                   $(div).append('<div id="d'+(x-1)+'"><select id="c'+(x-1)+'">\n\t<option>ET</option>\n\t<option>OU</option>\n</select>\n<br>Est-ce que <select id="Predicat'+(x-1)+'"><option>...</option><option>au moins un des personnages</option><option>les deux personnages</option><option>aucun des personnages</option></select><select id="attr'+(x-1)+'" onchange="">'+html+'</select><select id="valeur'+(x-1)+'"></select>?<a href=# id="s'+(x-1)+'" class="delete">supprimer</a></select></div>'); //add select
+                    $(div).append('<div id="d'+(x-1)+'"><select id="c'+(x-1)+'">\n\t<option>ET</option>\n\t<option>OU</option>\n</select>\n<br>Est-ce que <select id="Predicat'+(x-1)+'"><option>...</option><option>au moins un des personnages</option><option>les deux personnages</option><option>aucun des personnages</option></select><select id="attr'+(x-1)+'" onchange="">'+html+'</select><select id="valeur'+(x-1)+'"></select>?<a href=# id="s'+(x-1)+'" class="delete">supprimer</a></select></div>'); //add select                
                 } 
                 else { 
                     let htmlBis = '<div id="d'+(x-1)+'"> <select id="c'+(x-1)+'">'; //Création du select du ET | OU
                     htmlBis += '<option>ET</option> <option>OU</option> </select>'; //Création des options du ET | OU
                     htmlBis += '</br>Est-ce que ce/ces personnages <select id="attr'+(x-1)+'">'; //Création de la partie 1 de la question
                     htmlBis += html+'</select><select id="valeur'+(x-1)+'"></select> ?'; //Création de la partie 2 de la question
+                    if (x-2>0) {
+                        $("#s"+(x-2)).remove();
+                    }
+                    htmlBis += '<a href=# id="s'+(x-1)+'" class="delete">supprimer</a> </select> </div>'; //Création du bouton de suppression
+                    $(div).append(htmlBis); //add select
                 }
-                
                 $("#attr"+(x-1)).attr("onchange","selectVal("+(x-1)+")");
                 if(ModeDouble){
                     $("#valider").attr("onclick","traitementQuestionsModeDouble("+x+")");
