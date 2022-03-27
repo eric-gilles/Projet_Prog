@@ -170,9 +170,6 @@ td:hover {
 #validation{
     text-align: center;
 }
-#validation:hover{
-    cursor: pointer;
-}
 #CONVERSION{
     font-size: x-large;
 }
