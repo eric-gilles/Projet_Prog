@@ -195,7 +195,7 @@ function importIMG(){
             x.setAttribute("class", "avatar");
             x.setAttribute("id", nbPersonnage);
             document.getElementById("table").rows[colonne].insertCell(-1).appendChild(x);
-            $("td").attr("id", "td"+nbPersonnage);
+            $("#"+nbPersonnage).parent().attr("id", "td"+nbPersonnage);
             $("#"+(nbPersonnage)).after("<p id='nom"+nbPersonnage+"'></p>");
             nbPersonnage++;
             if (nbElement == 5) {
@@ -205,6 +205,10 @@ function importIMG(){
         }
     }
     AffichageDynNom();
+    for(let i=0;i<nbPersonnage;i++){
+        let width = document.getElementById(i).clientWidth;
+        document.getElementById(i).style.height = (width+0)+"px";
+    }
 }
 
 //Téléchargement d'un fichier json
