@@ -1,5 +1,5 @@
 # Projet_Prog
-Générateur pour le jeu Qui-est-ce ? réalisé par le groupe S en L2 Informatique en 2022
+Jeu Qui-est-ce ? réalisé par le groupe S en L2 Informatique en 2022
 Membres du groupe :
     - Éric GILLES (GrA)
     - Lisa SAVY (GrA)
@@ -10,12 +10,19 @@ Pour installer les fichiers :
     Récupérer le fichier .zip sur Moodle dans la zone de dépot du rendu du 6 mars,
     Extraire le fichier.
 
-Pour lancer le générateur : 
-    >   Ouvrir le fichier "Generateur.html" (qui se trouve dans le sous-dossier "Code") dans une page Internet.
+Pour lancer le jeu : 
+    >   Si vous utilisez Linux, lancez simplement "QuiEstCe Lanceur" dans le dossier principal.
+    >   Sinon, ouvrir le fichier "QuiEstCe.html" (qui se trouve dans le sous-dossier "Code") dans une page Internet.
+        
+    Cliquer sur le bouton "Parcourir" et choisir un des trois fichiers json à disposition (json1.json, json2.json et json3.json dans le répertoire "json").
+    
+    Cliquer sur le bouton "Importer" et le jeu sera opérationnel.
 
-Quelques explications sur le logiciel : 
-    >   Les attributs :
-        Tous les personnages auront les même paramètres qui doivent être entrés lors de la création du premier personnage, quand celui-ci sera créé les attributs seront figés (donc on ne pourra pas les modifier). La zone de saisie des attributs se situe sur la droite de la page en-dessous du logo. Il
+Quelques explications sur le jeu : 
+    >   La logique des questions et la suivante :
+        Il n'y a pas de priorité du "ET" sur le "OU", la logique se fait dans l'ordre des questions.
+        Exemple : ((Est-ce que ce personnage a les cheveux blonds? OU Est-ce que ce personnage a les yeux bleus?) ET Est-ce que ce personnage est une femme?)
+            -> Les parenthèses indiquent l'ordre.
 
     > Sont présents dans le jeu deux modes additionnels :
         Le Mode FACILE & le mode DOUBLE PERSONNAGE (que l'on pourrait traduire par difficle)
