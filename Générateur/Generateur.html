@@ -107,20 +107,20 @@
         function AffichageDynNom(){
             $('#nom'+nombrePersonnages).empty();
             if($('#valeurNom').val() != ""){
-                $('#nom'+nombrePersonnages).append($('#valeurNom').val()+"<i class='fa fa-trash-o' style='font-size:24px'></i>");
+                $('#nom'+nombrePersonnages).append($('#valeurNom').val()+"<i class='fa fa-trash-o' onclick='supprimerPerso()' style='font-size:24px'></i>");
             } 
             else {
-                $('#nom'+nombrePersonnages).append("Sans nom<i class='fa fa-trash-o' style='font-size:24px'></i>");
+                $('#nom'+nombrePersonnages).append("Sans nom<i class='fa fa-trash-o' onclick='supprimerPerso()' style='font-size:24px'></i>");
             }
             $('#valeurNom').off;
             $('#valeurNom').on('input',function(e){
                 if(nombreImages == nombrePersonnages){
                     $('#nom'+nombrePersonnages).empty();
                     if($('#valeurNom').val() != ""){
-                        $('#nom'+nombrePersonnages).append($('#valeurNom').val()+"<i class='fa fa-trash-o' style='font-size:24px'></i>");
+                        $('#nom'+nombrePersonnages).append($('#valeurNom').val()+"<i class='fa fa-trash-o' onclick='supprimerPerso()' style='font-size:24px'></i>");
                     } 
                     else {
-                        $('#nom'+nombrePersonnages).append("Sans nom<i class='fa fa-trash-o' style='font-size:24px'></i>");
+                        $('#nom'+nombrePersonnages).append("Sans nom<i class='fa fa-trash-o' onclick='supprimerPerso()' style='font-size:24px'></i>");
                     }
                 } else {console.log("Erreur du DynNom");}
             }); 

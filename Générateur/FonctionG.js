@@ -65,9 +65,13 @@ function creationObjetPerso(){
         personnage.image = document.getElementById(nbPersonnage-1).src;
         personnage.attributs = new Object();
         for(let i=0;i<nbAttribut;i++){
-            if($("#attr"+i).val() == ""){
+            if($("#attr"+i).val() != null){
+                personnage.attributs[$("#attr"+i).val()] = $("#valeur"+i).val().split(",");
+                $("#valeur"+i).val("");
+            }
+            else {
                 erreur = true;
-                console.log("Erreur : Attribut ou valeur null");
+                console.log("Erreur : Attribut null");
                 alert("L'un des attributs n'est pas renseigné correctement ou est vide");
             }
         }
@@ -81,8 +85,12 @@ function creationObjetPerso(){
     for(let o of listeNom){
         let compteur=0;
         for (let a in listePersonnages[o].attributs) {
+            console.log("a : "+a);
+            console.log("personnage : "+personnage);
+            console.log("personnage.attributs : "+personnage.attributs);
+            console.log("personnage.attributs[a] : "+personnage.attributs[a]);
             if (listePersonnages[o].attributs[a].length==personnage.attributs[a].length) {
-                let c=0
+                let c=0;
                 for (let e of personnage.attributs[a]) {
                     if (listePersonnages[o].attributs[a].includes(e)) {c++;}
                 }
@@ -98,10 +106,10 @@ function creationObjetPerso(){
         }
     }
     if (!erreur) {
-        for(let i=0;i<nbAttribut;i++){
+        /*for(let i=0;i<nbAttribut;i++){
             personnage.attributs[$("#attr"+i).val()] = $("#valeur"+i).val().split(",");
             $("#valeur"+i).val("");
-        }
+        } c'est ta boucle pourrie ici là qui faisait bug*/
         nbPersoPrevious += 1;
         $("#addAttribut").remove();
         for(let i=0;i<nbAttribut;i++){
