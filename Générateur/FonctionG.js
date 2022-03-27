@@ -65,7 +65,7 @@ function creationObjetPerso(){
         personnage.image = document.getElementById(nbPersonnage-1).src;
         personnage.attributs = new Object();
         for(let i=0;i<nbAttribut;i++){
-            if($("#attr"+i).val() != null){
+            if($("#attr"+i).val() != ""){
                 personnage.attributs[$("#attr"+i).val()] = $("#valeur"+i).val().split(",");
                 $("#valeur"+i).val("");
             }
@@ -105,7 +105,7 @@ function creationObjetPerso(){
         /*for(let i=0;i<nbAttribut;i++){
             personnage.attributs[$("#attr"+i).val()] = $("#valeur"+i).val().split(",");
             $("#valeur"+i).val("");
-        } c'est ta boucle pourrie ici là qui faisait bug*/
+        }*/
         nbPersoPrevious += 1;
         $("#addAttribut").remove();
         for(let i=0;i<nbAttribut;i++){
