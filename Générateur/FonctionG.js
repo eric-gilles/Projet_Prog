@@ -85,11 +85,7 @@ function creationObjetPerso(){
     for(let o of listeNom){
         let compteur=0;
         for (let a in listePersonnages[o].attributs) {
-            console.log("a : "+a);
-            console.log("personnage : "+personnage);
-            console.log("personnage.attributs : "+personnage.attributs);
-            console.log("personnage.attributs[a] : "+personnage.attributs[a]);
-            if (listePersonnages[o].attributs[a].length==personnage.attributs[a].length) {
+            if (listePersonnages[o].attributs[a].length == personnage.attributs[a].length) {
                 let c=0;
                 for (let e of personnage.attributs[a]) {
                     if (listePersonnages[o].attributs[a].includes(e)) {c++;}
@@ -175,6 +171,10 @@ function importIMG(){
                 $("#"+(nbPersonnage)).after("<p id='nom"+nbPersonnage+"'></p>");
                 nbPersonnage++;
                 AffichageDynNom();
+                for(let i=0;i<nbPersonnage;i++){
+                    let width = document.getElementById(i).clientWidth;
+                    document.getElementById(i).style.height = (width+0)+"px";
+                }
             };
             fr.readAsDataURL(file.files[0]);
             if (nbElement == 5) {
