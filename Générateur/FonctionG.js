@@ -128,13 +128,31 @@ function creationObjetPerso(){
     }
 }
 
-function supprimerPerso(){
-    nbPersonnage--;
-    nbPersoPrevious--;
-    $("#td"+(nbPersonnage)).remove();
-    Reflect.deleteProperty(listePersonnages, listeNom[nbPersonnage]);
-    listeNom.splice(nbPersonnage, 1);
-    $("#importButton").prop("disabled",false);
+function supprimerPerso(i){
+    if(listeNom.length>0){
+        $("#"+i.parentElement.parentElement.id).remove();
+        let x = (i.parentElement.parentElement.id).substr(2);
+        Reflect.deleteProperty(listePersonnages, listeNom[x]);
+        listeNom.splice(x, 1);
+        $("#importButton").prop("disabled",false);
+        x=parseInt(x);
+        for(let j=(x+1);j<nbPersonnage;j++){
+            $("#td"+j).attr("id","td"+(j-1));
+            $("#"+j).attr("id",(j-1));
+            $("#nom"+j).attr("id","nom"+(j-1));
+        }
+        nbPersonnage--;
+        nbPersoPrevious--;
+        nombrePersonnages--;
+        nombreImages--;
+        nbElement--;
+        for(let i=0;i<nbPersonnage;i++){
+            let width = document.getElementById(i).clientWidth;
+            document.getElementById(i).style.height = (width+0)+"px";
+        }
+        AffichageDynNom();
+        
+    }
 }
 
 //Convertit les personnages en un objet JSON
