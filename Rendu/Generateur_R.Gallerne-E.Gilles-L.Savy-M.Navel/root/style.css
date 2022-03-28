@@ -1,0 +1,179 @@
+h1{
+    text-align: center;
+}
+#Personnages{
+    border: solid;
+}
+#main{
+    background: linear-gradient(rgb(255, 255, 255), #f81212);
+}
+.logo{
+    width: 80%;
+    margin-right:0%;
+    margin-left:0%;
+    margin-top:0%;
+    margin-bottom:10%;
+}
+.logo:hover{
+    cursor: pointer;
+} 
+.cadre{
+    border-style:solid;
+    padding-right:0px;
+    height: auto;
+    width: 100%;
+    background: linear-gradient(rgb(192, 224, 255), #0065fc);
+}
+.grille{
+    margin:5%;
+    height: 100%;
+    min-height: 150px;
+    width: auto;
+    background: linear-gradient(rgb(250, 253, 60), #fceb00);
+}
+table{
+    table-layout: fixed;
+    height: 100%;
+    width: 100%;
+}
+tr{
+    width: 100%;
+} 
+td{
+    max-width: 245px;
+    max-height: 245px;
+    vertical-align: top;
+}  
+
+.avatar{
+    border-style:solid;
+    border-color:rgb(255, 51, 0);
+    height: auto;
+    width: 100%;
+    top:0;
+    margin-top:0;
+    padding-top:0;
+    border-width: 4px;
+    border-image-width: auto;
+    transition: all 800ms ease-out;
+    transform: rotate3d(0,1,0,0deg);
+}
+.persoTentative{
+    border-style:hidden;
+    height: auto;
+    text-align: center;
+    width: 60%;
+} 
+.rotated{
+    border-style:solid;
+    border-color:rgb(255, 51, 0);
+    height: auto;
+    width: 100%;
+    animation: rotate;
+    border-width: 4px;
+    object-fit: cover;
+    transition: all 800ms ease-out;
+    transform: rotate3d(0,1,0,89.8deg);
+}
+/*.rotated:hover {
+    transform: rotate3d(0,1,0,89deg);
+}*/
+.proposition{
+    margin-top:0%;
+    margin-left:0px;
+    text-align:center;
+}
+.facile{
+    text-align: center;
+    top:0%;
+}
+body {
+    font-family: 'ABeeZee';
+    background: #f81212;
+    overflow-x: hidden;
+}
+
+/*css bouton*/
+input{
+    border-radius: 15px;
+}
+
+.caseTableau{
+    padding: 10px;
+    width: 20%;
+    height: 50%
+}
+.nom{
+    text-align: center;
+    position:relative;
+    bottom: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    font-size:medium;
+}
+
+img:not(.logo,.persoTentative) {
+    max-height: 100%;
+    width: 100%;
+}
+input[type=button] {
+    transition-duration: 0.4s;
+    border: 2px solid #f7bd01;
+    border-radius: 5px;
+    font-size: 100%;  
+    background-color: #ffffff;
+}
+  
+input[type=button]:hover:not(.disabled) {
+    background-color: #f7bd01;
+    cursor: pointer;
+}
+#valider,#estimer{
+    max-height: 30px;
+}  
+
+.disabled {
+    opacity: 0.6;
+    background-color: #f7bd01;
+    cursor: not-allowed;
+}
+
+td:hover {
+    background-color: rgba(255, 124, 2, 0.281);
+    cursor: pointer;
+}
+.reponse{
+    font-weight: bolder;
+    background-color: rgb(255, 255, 255);
+    border: 3px solid #f7bd01;
+    border-radius: 5px;
+    min-width: 40px;
+    text-align: center;
+    max-height: 30px;
+}
+
+/*Partie générateur*/
+
+.val{
+    width:80%;
+    margin-top:2%;
+}
+.attributs{
+    padding-top: 0.7px;
+    padding-bottom: 5.6px;
+    padding-left: 10px;  
+    margin-top:2.55%;
+}
+#button{
+    text-align: center;
+}
+#validation{
+    text-align: center;
+}
+#CONVERSION{
+    font-size: x-large;
+}
+i:hover{
+    cursor: pointer;
+}
+
