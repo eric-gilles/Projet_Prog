@@ -75,31 +75,31 @@ function creationObjetPerso(){
                 alert("L'un des attributs n'est pas renseigné correctement ou est vide");
             }
         }
+        let var1;
+        let var2;
+        for(let o of listeNom){
+            let compteur=0;
+            for (let a in listePersonnages[o].attributs) {
+                if (listePersonnages[o].attributs[a].length == personnage.attributs[a].length) {
+                    let c=0;
+                    for (let e of personnage.attributs[a]) {
+                        if (listePersonnages[o].attributs[a].includes(e)) {c++;}
+                    }
+                    if (c==personnage.attributs[a].length) {compteur++;}
+                }            
+            }
+            erreur = (compteur==nbAttribut);
+            var1 = JSON.stringify(personnage.attributs);
+            var2 = JSON.stringify(listePersonnages[o].attributs);
+            if ((var1 == var2) || (personnage.nom == listePersonnages[o].nom)) {
+                erreur = true;
+                alert("Ce personnage est indéférenciable ou a le même nom qu'un personnage déjà créée");
+            }
+        }
     } else {
         erreur = true;
         console.log("Erreur : Nombre de personnage non incrémenté");
         alert("Veuillez ajouter une image pour votre personnage");
-    }
-    let var1;
-    let var2;
-    for(let o of listeNom){
-        let compteur=0;
-        for (let a in listePersonnages[o].attributs) {
-            if (listePersonnages[o].attributs[a].length == personnage.attributs[a].length) {
-                let c=0;
-                for (let e of personnage.attributs[a]) {
-                    if (listePersonnages[o].attributs[a].includes(e)) {c++;}
-                }
-                if (c==personnage.attributs[a].length) {compteur++;}
-            }            
-        }
-        erreur = (compteur==nbAttribut);
-        var1 = JSON.stringify(personnage.attributs);
-        var2 = JSON.stringify(listePersonnages[o].attributs);
-        if ((var1 == var2) || (personnage.nom == listePersonnages[o].nom)) {
-            erreur = true;
-            alert("Ce personnage est indéférenciable ou a le même nom qu'un personnage déjà créée");
-        }
     }
     if (!erreur) {
         /*for(let i=0;i<nbAttribut;i++){
@@ -122,6 +122,9 @@ function creationObjetPerso(){
         console.log(listeNom);
         $("#valeurNom").val("");
         $("#importButton").prop("disabled",false);
+    } 
+    else {
+        nombrePersonnages--;
     }
 }
 
