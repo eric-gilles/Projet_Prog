@@ -30,10 +30,10 @@ Quelques explications sur le logiciel :
             - "Est-ce que au moins un des personnages |a/ont les cheveux| |bruns|?"
 
     >   Les attributs :
-        Tous les personnages auront les même paramètres qui doivent être entrés lors de la création du premier personnage, quand celui-ci sera créé les attributs seront figés (donc on ne pourra pas les modifier). La zone de saisie des attributs se situe sur la droite de la page en-dessous du logo. Il ne peut pas y avoir plus de __ attributs et chaque attribut ne peuvent pas faire plus de __ caractères.
+        Tous les personnages auront les même paramètres qui doivent être entrés lors de la création du premier personnage, quand celui-ci sera créé les attributs seront figés (donc on ne pourra pas les modifier). La zone de saisie des attributs se situe sur la droite de la page en-dessous du logo. Il ne peut pas y avoir plus de 16 attributs et chaque attribut ne peuvent pas faire plus de 23 caractères. (choix purement abrbitraire afin d'imposer une limite au joueur)
 
     >   Les valeurs :
-        Chaque attribut peut ou non avoir un valeur, voire même plusieurs. La zone de saisie des valeurs est en dessous du rendu des images, pour chaque zone de saisie de valeur l'attribut associé est affiché avant. Si vous souhaitez mettre plusieurs valeurs pour un attribut, il vous suffit de marquer vos différentes valeurs en les séparant par une virgule (exemple : |un uniforme,un katana| (il peut y avoir des espaces entre les mots composant une valeur mais pas après la virgule les séparant)).
+        Chaque attribut peut ou non avoir une valeur, voire même plusieurs. La zone de saisie des valeurs est en dessous du rendu des images, pour chaque zone de saisie de valeur l'attribut associé est affiché avant. Si vous souhaitez mettre plusieurs valeurs pour un attribut, il vous suffit de marquer vos différentes valeurs en les séparant par une virgule (exemple : |un uniforme,un katana| (il peut y avoir des espaces entre les mots composant une valeur mais pas après la virgule les séparant)).
 
     >   Créer et supprimer un personnage :
         Pour créer un personnage, il faut qu'il ait un nom, des valeurs d'attributs capable de l'identifier et qui le rende unique et il faut avoir importer une image. Si c'est le premier personnage qui est en train d'être créé, il faut que tous ses attributs aient une valeur non nulle. Il vous suffira en suite de cliquer sur le bouton "Créer le Personnage".

@@ -141,11 +141,12 @@ function supprimerPerso(i){
             $("#"+j).attr("id",(j-1));
             $("#nom"+j).attr("id","nom"+(j-1));
         }
+        //if(nombreImages!=nombrePersonnages){
+            nbPersoPrevious--;
+            nombrePersonnages--;
+        //}
         nbPersonnage--;
-        nbPersoPrevious--;
-        nombrePersonnages--;
         nombreImages--;
-        nbElement--;
         for(let i=0;i<nbPersonnage;i++){
             let width = document.getElementById(i).clientWidth;
             document.getElementById(i).style.height = (width+0)+"px";
@@ -180,6 +181,7 @@ function importIMG(){
             var fr = new FileReader();
             fr.onload = function (e) {
                 nbElement++;
+                console.log(nbElement);
                 if(nbElement == 5) {
                     $("#table").find('tbody').append('<tr></tr>');
                 }
