@@ -171,7 +171,8 @@ function InitialisationQuestion(){
                         $("#s"+(x-2)).remove();
                     }
                     htmlBis += '<a href=# id="s'+(x-1)+'" class="delete">supprimer</a> </select> </div>'; //Création du bouton de suppression
-                    $(div).append(htmlBis); //add select                } 
+                    $(div).append(htmlBis); //add select
+                } 
                 else { 
                     let htmlBis = '<div id="d'+(x-1)+'"> <select id="c'+(x-1)+'">'; //Création du select du ET | OU
                     htmlBis += '<option>ET</option> <option>OU</option> </select>'; //Création des options du ET | OU
