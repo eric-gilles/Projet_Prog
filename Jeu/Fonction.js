@@ -165,8 +165,13 @@ function InitialisationQuestion(){
                     html+="<option id='"+a+"'>"+a+"</option>";
                 }
                 if(ModeDouble){
-                    $(div).append('<div id="d'+(x-1)+'"><select id="c'+(x-1)+'">\n\t<option>ET</option>\n\t<option>OU</option>\n</select>\n<br>Est-ce que <select id="Predicat'+(x-1)+'"><option>...</option><option>au moins un des personnages</option><option>les deux personnages</option><option>aucun des personnages</option></select><select id="attr'+(x-1)+'" onchange="">'+html+'</select><select id="valeur'+(x-1)+'"></select>?<a href=# id="s'+(x-1)+'" class="delete">supprimer</a></select></div>'); //add select                
-                } 
+                    $(div).append(); //add select 
+                    htmlBis='<div id="d'+(x-1)+'"><select id="c'+(x-1)+'">\n\t<option>ET</option>\n\t<option>OU</option>\n</select>\n<br>Est-ce que <select id="Predicat'+(x-1)+'"><option>...</option><option>au moins un des personnages</option><option>les deux personnages</option><option>aucun des personnages</option></select><select id="attr'+(x-1)+'" onchange="">'+html+'</select><select id="valeur'+(x-1)+'"></select>?</select>';              
+                    if (x-2>0) {
+                        $("#s"+(x-2)).remove();
+                    }
+                    htmlBis += '<a href=# id="s'+(x-1)+'" class="delete">supprimer</a> </select> </div>'; //Création du bouton de suppression
+                    $(div).append(htmlBis); //add select                } 
                 else { 
                     let htmlBis = '<div id="d'+(x-1)+'"> <select id="c'+(x-1)+'">'; //Création du select du ET | OU
                     htmlBis += '<option>ET</option> <option>OU</option> </select>'; //Création des options du ET | OU
