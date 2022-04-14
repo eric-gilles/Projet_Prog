@@ -477,8 +477,7 @@ function save(){
         if ($("#"+i).attr('src')=="https://raw.githubusercontent.com/eric-gilles/Projet_Prog/main/images/back.jpg"){
             cartes[i]=true;
         } 
-        /*= class="avatar" id="2" onclick="changeImage('2','https://raw.githubusercontent.com/eric-gilles/Projet_Prog/main/images/back.jpg','https://raw.githubusercontent.com/eric-gilles/Projet_Prog/main/images/jsonlg/ipdl.png')">
-    */}
+    }
     localStorage.setItem("cartes", cartes);
     if(ModeDouble){
         localStorage.setItem("perso2", persoCache2);
@@ -499,7 +498,6 @@ $(document).ready(function() {
                     changeImage(i, $("#"+i).attr('src'), "https://raw.githubusercontent.com/eric-gilles/Projet_Prog/main/images/back.jpg"); 
                 }
             }
-            changeImage
             GenerationChoix(JSON.parse(localStorage._json));
             ModeDouble = localStorage.getItem("modeD") === "true";
             ModeFacile = localStorage.getItem("modeF") === "true";    
