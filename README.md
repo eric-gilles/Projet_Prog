@@ -4,7 +4,7 @@ Projet réalisé en L2 Informatique en 2022.
 <a href="https://github.com/eric-gilles/Projet_Prog"><img src="https://github.com/eric-gilles/Projet_Prog/blob/main/Fichiers%20Rapports/images/CaptureJeuQuiEstCe.png" alt="Capture"/></a>
 
 ## Jeu développé en : 
-<a href="https://github.com/eric-gilles/Projet_Prog"><img src="https://skills.thijs.gg/icons?i=html,css,js,jquery" alt="Languages Used"/></a>
+<a href="https://github.com/eric-gilles/Projet_Prog"><img src="https://skillicons.dev/icons?i=html,css,js,jquery" alt="Languages Used"/></a>
 
 
 ## Réalisé par :
